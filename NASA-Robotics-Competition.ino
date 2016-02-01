@@ -1,42 +1,29 @@
-#include <decision.h>
+/*  CODE FOR NASA ROBOTICS CHALLANGE 2016
+ *  by Igor Ryzhkov (igor.o.ryzhkov@gmail.com)
+ */ 
 
-#define IR1in 1
-#define IR1out 2
-#define IR2in 3
-#define IR2out 4
+// Note: ISR stands for Interrupt Service Routine
 
-#define LeftMotors 5
-#define RightMotors 6
+// Global variables
+volatile int  realTargetDirection = 0, 
+              targetDirection = 0, 
+              currentDirection = 0;
 
-void setup() {
-  // put your setup code here, to run once:
+volatile byte dangerCode = 0;
+
+void setup() 
+{
+  Serial.begin(9600);
+  timer_setup();
+  motors_setup();
+  sensors_setup();
 }
 
-void loop() {
-  doScanning();
-  if (haveUpdates()) {getUpdates();}
-  
-  if (inDanger()) {
-    quickBreak();
+void loop() 
+{
+  if (Serial.available()) 
+  {
+    Serial.read();
+    Serial.println("I am here");
   }
-}
-
-bool inDanger () {
-  return false;
-}
-
-bool haveUpdates() {
-  return false;
-}
-
-void getUpdates() {
-  int a = 1 + 1;
-}
-
-void quickBreak() {
-  int b = 2 + 2;
-}
-
-void doScanning() {
-  int c = 3 + 3;
 }
