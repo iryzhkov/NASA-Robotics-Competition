@@ -6,37 +6,28 @@
 
 // Note: ISR stands for Interrupt Service Routine
 
+#include "Motor.h"
+#include "Movement_Control.h"
+#include "Robot_Logic.h"
+#include "Sensor.h"
+
 // Global variables
 #define LED 13
 
-volatile  unsigned  long  timerCounter = 0;
-          unsigned  long  previousTimerCounter = 0;
+volatile bool light = false;
 
-volatile  int   realTargetDirection = 0, 
-                targetDirection = 0, 
-                currentDirection = 0;
-
-volatile  byte  dangerCode = 0;
-
-volatile  bool  light = false;
-
-
+Robot_Logic *Robot;
 
 void setup() 
 {
   Serial.begin(9600);
 
   pinMode(LED, OUTPUT);
+
+  timer_setup(); // setting continious data acquisition.
 }
 
 void loop() 
 {
-  noInterrupts();
-  unsigned long t = timerCounter;
-  timerCounter = 0;
-  interrupts();
-
-  Serial.print ("# of timer counters: ");
-  Serial.println (t);
   delay(1000);
 }

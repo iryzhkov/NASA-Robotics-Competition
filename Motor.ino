@@ -4,36 +4,20 @@
  *  This is Motor class. It provides the interface for the motors.
  */ 
 
-class Motor {
-    private:
-        byte PWMpin, 
-             DIRpin,
-             PWM,
-             DIR;
-  
-    public:
-        Motor(byte PWMpin, byte DIRpin);
-        
-        void setDIR (byte);
-        byte getDIR ();
-        void setPWM (byte);
-        byte getPWM ();  
-};
-
-Motor::Motor (byte PWMpin, byte DIRpin) {
+Motor::Motor (byte PWM_pin, byte DIR_pin) {
   /*  Motor (PWMpin, DIRpin)
    *  
    *  assign pins, and set them up.
    */
    
-    this->DIRpin = DIRpin;
-    this->PWMpin = PWMpin;
+    this->DIR_pin = DIR_pin;
+    this->PWM_pin = PWM_pin;
     
-    pinMode(this->DIRpin, OUTPUT);
-    pinMode(this->PWMpin, OUTPUT);
+    pinMode(this->DIR_pin, OUTPUT);
+    pinMode(this->PWM_pin, OUTPUT);
 }
 
-void Motor::setDIR (byte dir) {
+void Motor::set_DIR (byte dir) {
     /*  setDIR (dir):
      *  
      *  0 <= dir <= 1
@@ -43,10 +27,10 @@ void Motor::setDIR (byte dir) {
 
     // Save the value, and write it to the pin.
     this->DIR = dir;
-    digitalWrite (DIRpin, DIR); 
+    digitalWrite (DIR_pin, DIR); 
 }
 
-byte Motor::getDIR(){
+byte Motor::get_DIR(){
     /*  getDIR():
      *   
      *  returns current setting of DIR pin 
@@ -55,7 +39,7 @@ byte Motor::getDIR(){
     return DIR;
 }
 
-void Motor::setPWM (byte pwm) {
+void Motor::set_PWM (byte pwm) {
     /*  setDIR (dir):
      *  
      *  0 <= pwm <= 255
@@ -70,10 +54,10 @@ void Motor::setPWM (byte pwm) {
 
     // Set the PWM pin, and save the value.
     this->PWM = pwm;
-    analogWrite(PWMpin, PWM);
+    analogWrite(PWM_pin, PWM);
 }
 
-byte Motor::getPWM () {
+byte Motor::get_PWM () {
      /*  getDIR():
      *   
      *  returns current setting of PWM pin 
