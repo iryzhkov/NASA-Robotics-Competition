@@ -20,6 +20,8 @@ volatile  byte  dangerCode = 0;
 
 volatile  bool  light = false;
 
+
+
 void setup() 
 {
   Serial.begin(9600);

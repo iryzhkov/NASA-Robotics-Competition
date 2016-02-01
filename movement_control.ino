@@ -6,10 +6,10 @@
 
 class Movement_Control {
     private:
-        Motor leftMotor, 
-              rightMotor;
+        Motor *leftMotor, 
+              *rightMotor;
     public:
-        Movement_Control (Motor left, Motor right);
+        Movement_Control (Motor *left, Motor *right);
         
         void Stop ();
         
@@ -23,7 +23,7 @@ class Movement_Control {
         void Differential_Turn_Right ();
 };
 
-Movement_Control::Movement_Control (Motor left, Motor right) {
+Movement_Control::Movement_Control (Motor *left, Motor *right) {
    /*  Movement_Control (left, right):
     *   
     *  sets the right and the left motors. 
@@ -37,10 +37,10 @@ Movement_Control::Movement_Control (Motor left, Motor right) {
 void Movement_Control::Stop () {
    /*  Stop():
     *   
-    *  stops the movement of the robot
+    *  stops the movement of the robot by setting PWM of both motors to 0.
     */
    
-    leftMotor.setPWM(0);
-    rightMotor.setPWM(0);
+    leftMotor->setPWM(0);
+    rightMotor->setPWM(0);
 }
 

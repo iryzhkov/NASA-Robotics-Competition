@@ -2,7 +2,6 @@
  *  by Igor Ryzhkov (igor.o.ryzhkov@gmail.com)
  *  
  *  This is Motor class. It provides the interface for the motors.
- *  
  */ 
 
 class Motor {
@@ -11,15 +10,14 @@ class Motor {
              DIRpin,
              PWM,
              DIR;
-             
+  
     public:
-        Motor();
         Motor(byte PWMpin, byte DIRpin);
-        void Motor_Setup (byte PWMpin, byte DIRpin);
-        void setDIR (int);
-        int getDIR ();
-        void setPWM (int);
-        int getPWM ();  
+        
+        void setDIR (byte);
+        byte getDIR ();
+        void setPWM (byte);
+        byte getPWM ();  
 };
 
 Motor::Motor (byte PWMpin, byte DIRpin) {
@@ -27,40 +25,28 @@ Motor::Motor (byte PWMpin, byte DIRpin) {
    *  
    *  assign pins, and set them up.
    */
-    this->Motor_Setup(PWMpin, DIRpin);
-}
-
-
-void Motor::Motor_Setup(byte PWMpin, byte DIRpi){
-  /*  Motor_Setup():
-   *  
-   *  sets the pinModes of the motor's pins, and saves the pins.
-   */
+   
     this->DIRpin = DIRpin;
-    this->PWMpin = PWMpin;   
-    pinMode(DIRpin, OUTPUT);
-    pinMode(PWMpin, OUTPUT);
+    this->PWMpin = PWMpin;
+    
+    pinMode(this->DIRpin, OUTPUT);
+    pinMode(this->PWMpin, OUTPUT);
 }
 
-void Motor::setDIR (int dir) {
+void Motor::setDIR (byte dir) {
     /*  setDIR (dir):
      *  
      *  0 <= dir <= 1
      *  
      *  sets the direction pin to the specified value. 
      */
-    
-    // Check if the input is valid.
-    if (dir < 0 || dir > 255) {
-        return;
-    }
 
     // Save the value, and write it to the pin.
     this->DIR = dir;
     digitalWrite (DIRpin, DIR); 
 }
 
-int Motor::getDIR(){
+byte Motor::getDIR(){
     /*  getDIR():
      *   
      *  returns current setting of DIR pin 
@@ -69,7 +55,7 @@ int Motor::getDIR(){
     return DIR;
 }
 
-void Motor::setPWM (int pwm) {
+void Motor::setPWM (byte pwm) {
     /*  setDIR (dir):
      *  
      *  0 <= pwm <= 255
@@ -78,7 +64,7 @@ void Motor::setPWM (int pwm) {
      */
     
     // Check if the input is valid.
-    if (pwm > 1 or pwm < 0) {
+    if (pwm > 1) {
         return;
     }
 
@@ -87,7 +73,7 @@ void Motor::setPWM (int pwm) {
     analogWrite(PWMpin, PWM);
 }
 
-int Motor::getPWM () {
+byte Motor::getPWM () {
      /*  getDIR():
      *   
      *  returns current setting of PWM pin 
