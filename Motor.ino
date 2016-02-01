@@ -24,6 +24,11 @@ void Motor::set_DIR (byte dir) {
      *  
      *  sets the direction pin to the specified value. 
      */
+     
+     // check for validity of the input
+     if (dir > 1) {
+        return;
+    }
 
     // Save the value, and write it to the pin.
     this->DIR = dir;
@@ -46,11 +51,6 @@ void Motor::set_PWM (byte pwm) {
      *  
      *  sets the PWM pin to the specified value. 
      */
-    
-    // Check if the input is valid.
-    if (pwm > 1) {
-        return;
-    }
 
     // Set the PWM pin, and save the value.
     this->PWM = pwm;
