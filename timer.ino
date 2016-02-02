@@ -5,6 +5,8 @@
  *  Uses the fact, that we know the instance of Robot_Logic, which will control the robot.
  */ 
 
+// Note: ISR stands for Interrupt Service Routine
+
 void timer_setup () {
   // setting Timer1 for 200 Hz. (this will be the timer, that checks the inputs from the sensors, and decides what to do next 200 times per second).
   //http://www.instructables.com/id/Arduino-Timer-Interrupts/?ALLSTEPS
@@ -24,10 +26,6 @@ void timer_setup () {
 // Interupt Service Routine for updating sensor inputs, and changing danger code.
 ISR(TIMER1_COMPA_vect)
 {
-  //insert your code here that you want to run every time the counter reaches OCR1A
-  light = !light;
-  digitalWrite(LED,light);
-
   //update the sensor inputs on the Robot_Logic
-  Robot->Update_Sensors();
+  robot->Update_Sensors();
 }
