@@ -13,10 +13,12 @@ class Motor {
   
     public:
         Motor(byte PWM_pin, byte DIR_pin);
-        
+
+        // setter methods
         void set_DIR (byte);
         void set_PWM (byte);
 
+        // getter methods
         byte get_DIR ();
         byte get_PWM ();  
 };
