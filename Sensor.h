@@ -2,11 +2,36 @@
  *  by Igor Ryzhkov (igor.o.ryzhkov@gmail.com)
  */
 
- class Sensor { 
- };
+class Sensor {
+    protected:
+        int sensor_value;
+        volatile int sensor_input;
+    public:
+        virtual void Update_Value () = 0;
+        int  Get_Value ();
+};
 
- class IR_Sensor: public Sensor {
- };
+class IR_Sensor: public Sensor {
+    private:
+        byte sensor_pin;
+    public:
+        IR_Sensor (int pin);
+        void Update_Value ();
+};
 
- class Compas_Sensor: public Sensor {
- };
+class Serial_Sensor: public Sensor {
+    protected:
+        char trigger_value;
+    public:
+        void Update_Value ();
+};
+
+class Compass_Sensor: public Serial_Sensor {
+    public:
+        Compass_Sensor ();
+};
+
+class Beacon_Sensor: public Serial_Sensor {
+    public:
+        Beacon_Sensor ();
+};
