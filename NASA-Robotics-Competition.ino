@@ -4,12 +4,13 @@
  *  This is the main function. It uses all other classes and functions to control the robot.
  */ 
 
-// Note: ISR stands for Interrupt Service Routine
-
+// imports for the program.
+#include "Pin_Declaration.h"
 #include "Motor.h"
 #include "Movement_Control.h"
-#include "Robot_Logic.h"
 #include "Sensor.h"
+#include "Sensor_Logic.h"
+#include "Robot_Logic.h"
 
 // Global variables
 #define LED 13
