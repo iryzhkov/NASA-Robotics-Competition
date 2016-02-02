@@ -13,19 +13,17 @@
 #include "Robot_Logic.h"
 
 // Global variables
-#define LED 13
+Robot_Logic       *robot;
 
-volatile bool light = false;
+Movement_Control  *drive_Control;
 
-Robot_Logic *Robot;
+Motor             *left_Motor,
+                  *right_Motor;
 
-void setup() 
-{
-  Serial.begin(9600);
+Sensor_Logic      *sensor_Logic;
 
-  pinMode(LED, OUTPUT);
+Compass_Sensor    *compass_Sensor;
 
-  timer_setup(); // setting continious data acquisition.
 Beacon_Sensor     *beacon_Sensor;
 
 IR_Sensor         *left_Hole_Sensor,
@@ -64,7 +62,7 @@ void setup() {
     timer_setup(); // setting continious data acquisition.
 }
 
-void loop() 
-{
+void loop() {
+  Serial.println ("I am in the loop");
   delay(1000);
 }
