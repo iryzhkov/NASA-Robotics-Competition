@@ -5,4 +5,12 @@
  */
 
 class Sensor_Logic {
+    private:
+        Compass_Sensor *compass;
+        Beacon_Sensor *beacon;
+    public:
+        Sensor_Logic (Compass_Sensor *compass, Beacon_Sensor *beacon);
+        void Update_Sensors ();
+        int Get_Compass_Value();
+        int Get_Beacon_Value();
 };

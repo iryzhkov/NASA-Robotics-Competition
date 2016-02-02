@@ -20,11 +20,11 @@ Movement_Control  *drive_Control;
 Motor             *left_Motor,
                   *right_Motor;
 
-Sensor_Logic      *sensor_Logic;
+Sensor_Logic      *sensor_logic;
 
-Compass_Sensor    *compass_Sensor;
+Compass_Sensor    *compass_sensor;
 
-Beacon_Sensor     *beacon_Sensor;
+Beacon_Sensor     *beacon_sensor;
 
 IR_Sensor         *left_Hole_Sensor,
                   *right_Hole_Sensor,
@@ -43,26 +43,26 @@ void setup() {
     drive_Control = new Movement_Control(left_Motor, right_Motor);
 
     // setting up IR sensors
-    // left_Hole_Sensor = new IR_Sensor(left_hole_sensor_pin);
-    // right_Hole_Sensor = new IR_Sensor(right_hole_sensor_pin);
-    // left_Obstacle_Sensor = new IR_Sensor(left_obstacle_sensor_pin);
-    // right_Obstacle_Sensor = new IR_Sensor(right_obstacle_sensor_pin);
-    // middle_Obstacle_Sensor = new IR_Sensor(middle_obstacle_sensor_pin);
+    left_Hole_Sensor = new IR_Sensor(left_hole_sensor_pin);
+    right_Hole_Sensor = new IR_Sensor(right_hole_sensor_pin);
+    left_Obstacle_Sensor = new IR_Sensor(left_obstacle_sensor_pin);
+    right_Obstacle_Sensor = new IR_Sensor(right_obstacle_sensor_pin);
+    middle_Obstacle_Sensor = new IR_Sensor(middle_obstacle_sensor_pin);
 
     // setting up compass and beacon sensors
-    // compass_Sensor = new Compass_Sensor();
-    // beacon_Sensor = new Beacon_Sensor();
+    compass_sensor = new Compass_Sensor();
+    beacon_sensor = new Beacon_Sensor();
 
     // setting up sensor logic
-
+    sensor_logic = new Sensor_Logic (compass_sensor, beacon_sensor);
+    
     // setting up robot logic
-    // robot = new Robot_Logic (drive_Control, sensor_Logic);
-   
+    robot = new Robot_Logic (drive_Control, sensor_logic);
   
     timer_setup(); // setting continious data acquisition.
 }
 
 void loop() {
-  Serial.println ("I am in the loop");
-  delay(1000);
+  robot->main();
+  delay(100);
 }

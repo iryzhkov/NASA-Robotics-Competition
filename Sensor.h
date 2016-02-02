@@ -15,7 +15,7 @@ class IR_Sensor: public Sensor {
     private:
         byte sensor_pin;
     public:
-        IR_Sensor (int pin);
+        IR_Sensor (byte pin);
         void Update_Value ();
 };
 
@@ -23,6 +23,7 @@ class Serial_Sensor: public Sensor {
     protected:
         char trigger_value;
     public:
+        Serial_Sensor (char trigger);
         void Update_Value ();
 };
 
