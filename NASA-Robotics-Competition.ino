@@ -32,8 +32,10 @@ IR_Sensor         *left_Hole_Sensor,
                   *right_Obstacle_Sensor,
                   *middle_Obstacle_Sensor;
 
+
 void setup() {
-    Serial.begin(9600); // starting serial communication.
+    // starting serial communication.
+    Serial.begin(9600); 
 
     // setting up the motors
     left_Motor = new Motor (left_motor_pwm_pin, left_motor_dir_pin);
@@ -54,8 +56,7 @@ void setup() {
     beacon_sensor = new Beacon_Sensor();
 
     // setting up sensor logic
-
-    // !!! have to add more to this (The IR sensors).
+    // !!! have to add more to this (The IR sensors, all of them).
     sensor_logic = new Sensor_Logic (compass_sensor, beacon_sensor, middle_Obstacle_Sensor);
     
     // setting up robot logic

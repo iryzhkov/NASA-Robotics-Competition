@@ -7,7 +7,7 @@
 int Sensor::Get_Value () {
   /*  Sensor::Get_Value():
    *   
-   *   returns the current value of the sensor
+   *  returns the current value of the sensor
    */
 
     // disable interrupts (so that the value doesn't update, while we are copying it), and get the sensor input.
@@ -18,6 +18,25 @@ int Sensor::Get_Value () {
     interrupts();
 
      return sensor_value;
+}
+
+IR_Sensor::IR_Sensor (byte pin) {
+ /* IR_Sensor (pin):
+  *  
+  * Set pin for recieving, and save it it.
+  */
+  
+    this->sensor_pin = pin;
+    pinMode (pin, INPUT);
+}
+
+void IR_Sensor::Update_Value() {
+ /* IR_Sensor::Update_Value():
+  *  
+  * read the value from the pin.
+  */
+  
+    this->sensor_input = analogRead(this->sensor_pin); 
 }
 
 Serial_Sensor::Serial_Sensor (char trigger) {
@@ -44,7 +63,7 @@ void Serial_Sensor::Update_Value () {
           // skip the trigger and read the and the number in, if triggered.
           Serial.read();
 
-          // read in number. (Serial.parseInt() for some reason works incredibaly bad)
+          // read in number. Serial.parseInt() for some reason works very bad (It stops the system).
           this->sensor_input = 0;
           byte t;
           while (Serial.available()) {
@@ -56,25 +75,6 @@ void Serial_Sensor::Update_Value () {
           }
       }
    }
-}
-
-IR_Sensor::IR_Sensor (byte pin) {
- /* IR_Sensor (pin):
-  *  
-  * Set pin for recieving, and save it it.
-  */
-  
-    this->sensor_pin = pin;
-    pinMode (pin, INPUT);
-}
-
-void IR_Sensor::Update_Value() {
- /* IR_Sensor::Update_Value():
-  *  
-  * read the value from the pin.
-  */
-  
-    this->sensor_input = analogRead(this->sensor_pin); 
 }
 
 Compass_Sensor::Compass_Sensor (): Serial_Sensor('c') {
