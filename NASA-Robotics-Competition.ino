@@ -54,7 +54,9 @@ void setup() {
     beacon_sensor = new Beacon_Sensor();
 
     // setting up sensor logic
-    sensor_logic = new Sensor_Logic (compass_sensor, beacon_sensor);
+
+    // !!! have to add more to this (The IR sensors).
+    sensor_logic = new Sensor_Logic (compass_sensor, beacon_sensor, middle_Obstacle_Sensor);
     
     // setting up robot logic
     robot = new Robot_Logic (drive_Control, sensor_logic);
@@ -63,6 +65,6 @@ void setup() {
 }
 
 void loop() {
-  robot->main();
-  delay(100);
+    robot->main();
+    delay(100);
 }

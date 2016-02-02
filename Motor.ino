@@ -1,7 +1,7 @@
 /*  CODE FOR NASA ROBOTICS CHALLANGE 2016
  *  by Igor Ryzhkov (igor.o.ryzhkov@gmail.com)
  *  
- *  This is Motor class. It provides the interface for the motors.
+ *  Defines methods in Motor.h
  */ 
 
 Motor::Motor (byte PWM_pin, byte DIR_pin) {
@@ -65,4 +65,3 @@ byte Motor::get_PWM () {
      
     return this->PWM;
 }
-

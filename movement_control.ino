@@ -1,7 +1,7 @@
 /*  CODE FOR NASA ROBOTICS CHALLANGE 2016
  *  by Igor Ryzhkov (igor.o.ryzhkov@gmail.com)
  *  
- *  Class, that allows easy control of the robot's movements. 
+ *  Defines methods in Movement_Control.h
  */
 
 Movement_Control::Movement_Control (Motor *left, Motor *right) {
@@ -33,4 +33,3 @@ void Movement_Control::Stop () {
     left_Motor->set_PWM(0);
     right_Motor->set_PWM(0);
 }
-

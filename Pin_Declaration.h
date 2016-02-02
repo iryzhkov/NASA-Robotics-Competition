@@ -15,4 +15,4 @@
 #define right_hole_sensor_pin A1
 #define left_obstacle_sensor_pin A2
 #define right_obstacle_sensor_pin A3
-#define middle_obstacle_sensor_pin A4
+#define middle_obstacle_sensor_pin A0

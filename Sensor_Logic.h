@@ -8,9 +8,11 @@ class Sensor_Logic {
     private:
         Compass_Sensor *compass;
         Beacon_Sensor *beacon;
+        IR_Sensor *middle_obstacle;
     public:
-        Sensor_Logic (Compass_Sensor *compass, Beacon_Sensor *beacon);
+        Sensor_Logic (Compass_Sensor *compass, Beacon_Sensor *beacon, IR_Sensor *middle_obstacle);
         void Update_Sensors ();
         int Get_Compass_Value();
         int Get_Beacon_Value();
+        int Get_IR_Value();
 };
