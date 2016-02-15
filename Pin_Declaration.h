@@ -11,8 +11,10 @@
 #define left_motor_pwm_pin 5
 
 // declaration of sensor pins
-#define left_hole_sensor_pin A0
-#define right_hole_sensor_pin A1
-#define left_obstacle_sensor_pin A2
-#define right_obstacle_sensor_pin A3
-#define middle_obstacle_sensor_pin A0
+#define left_pit_sensor_pin A0
+#define right_pit_sensor_pin A1
+#define left_sensor_pin A2
+#define right_sensor_pin A3
+#define middle_sensor_pin A4
+
+#define direction_pin A5
