@@ -1,7 +1,9 @@
 /*  CODE FOR NASA ROBOTICS CHALLANGE 2016
  *  by Igor Ryzhkov (igor.o.ryzhkov@gmail.com)
  *  
- *  This header defines all the pins, that are going to be used in the project
+ *  This header defines all the pins, that are going to be used in the project. 
+ *  
+ *  Now it is very easy to change them. So easy.
  */ 
 
 // declaration of motor pins

@@ -4,7 +4,7 @@
  *  This is the main function. It uses all other classes and functions to control the robot.
  */ 
 
-// imports for the program.
+// imports for the program. (these are the headers for the classes that we will use).
 #include "Pin_Declaration.h"
 #include "Motor.h"
 #include "Movement_Control.h"

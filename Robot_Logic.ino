@@ -31,26 +31,32 @@ void Robot_Logic::main () {
     if (this->danger_id > this->process_id)
         this->process_id = this->danger_id;
 
-     
+    (this->*Tasks[process_id])();
 }
 
 void Robot_Logic::Go_Towards_Beacon () {
 }
 
 void Robot_Logic::Move_Forward () {
+    this->process_id = 0;
 }
 
 void Robot_Logic::Avoid_Possible_Obstacle_On_Side () {
+    this->process_id = 1;
 }
 
 void Robot_Logic::Avoid_Definite_Obstacle_On_Side () {
+    this->process_id = 1;
 }
 
 void Robot_Logic::Avoid_Obstacle_In_Front () {
+    this->process_id = 1;
 }
 
 void Robot_Logic::Avoid_Pit_On_Side () {
+    this->process_id = 1;
 }
 
 void Robot_Logic::Avoid_Pit_In_Front () {
+     this->process_id = 1;
 }
