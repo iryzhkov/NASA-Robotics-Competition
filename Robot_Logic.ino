@@ -7,6 +7,8 @@
 Robot_Logic::Robot_Logic (Movement_Control *control, Sensor_Logic *sensors) {
     this->control = control;
     this->sensors = sensors;
+    
+    this->process_id = 0;
 
     this->Tasks[0] = &Robot_Logic::Go_Towards_Beacon;
     this->Tasks[1] = &Robot_Logic::Move_Forward;
