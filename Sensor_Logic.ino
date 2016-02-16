@@ -12,10 +12,10 @@
 #define LEFT_PIT 4
 #define BEACON_DIRECTION 5
 
-#define pit_danger 255
+#define  PIT_DANGER 255
 
-#define obstacle_proximity_warning 255
-#define obstacle_proximity_danger 123
+#define OBSTACLE_WARNING 255
+#define OBSTACLE_DANGER 123
 
 Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sensor *middle_sensor,
                             Sensor *left_sensor, Sensor *right_pit_sensor, Sensor *left_pit_sensor) {
@@ -30,10 +30,39 @@ Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sens
     this->sensor[BEACON_DIRECTION] = beacon_direction;
 }
 
+int Sensor_Logic::Get_Danger_Code_For_Sensor (int which_sensor) {
+    int result = 0;
+
+    if (this->sensor[which_sensor]->Get_Value() > OBSTACLE_WARNING)
+      result = 1;
+
+    if (this->sensor[which_sensor]->Get_Value() > OBSTACLE_DANGER)
+      result = 2;
+
+    return result;
+}
+
+int Sensor_Logic::Get_Danger_Code_For_Pit_Sensor (int which_sensor) {
+    int result = 0;
+
+    if (this->sensor[which_sensor]->Get_Value() < PIT_DANGER)
+      result = 1;
+
+    return result;
+}
+
+
 void Sensor_Logic::Update_Sensors() {
     // Clean way to update all sensors' values
     for (int i = 0; i < 6; i++)
         this->sensor[i]->Update_Value();
+
+    this->sensor_danger_code[RIGHT] = this->Get_Danger_Code_For_Sensor (RIGHT);
+    this->sensor_danger_code[LEFT] = this->Get_Danger_Code_For_Sensor (LEFT);
+    this->sensor_danger_code[MIDDLE] = this->Get_Danger_Code_For_Sensor (MIDDLE);
+
+    this->sensor_danger_code[RIGHT_PIT] = this->Get_Danger_Code_For_Pit_Sensor (RIGHT_PIT);
+    this->sensor_danger_code[LEFT_PIT] = this->Get_Danger_Code_For_Pit_Sensor (LEFT_PIT);
 }
 
 int Sensor_Logic::Get_Beacon_Direction() {
