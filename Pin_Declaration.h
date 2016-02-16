@@ -6,6 +6,8 @@
  *  Now it is very easy to change them. So easy.
  */ 
 
+// TODO: Capitalize all defines.
+
 // declaration of motor pins
 #define right_motor_dir_pin 11
 #define right_motor_pwm_pin 6

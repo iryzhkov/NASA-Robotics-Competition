@@ -31,6 +31,7 @@ Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sens
 }
 
 void Sensor_Logic::Update_Sensors() {
+    // Clean way to update all sensors' values
     for (int i = 0; i < 6; i++)
         this->sensor[i]->Update_Value();
 }

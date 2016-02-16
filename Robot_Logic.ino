@@ -34,6 +34,11 @@ void Robot_Logic::main () {
     Serial.print ("I am starting/continiuing doing process #");
     Serial.println (process_id);
 
+    // Don't freak out about the next line of code.
+    // It calls a function from the array
+    // This is supposed to make the code cleaner.
+    // As you can see I don't need to do the switch
+    // And this is very modifiable (i.e. adding another function to array does not change this code)
     (this->*Tasks[process_id])();
 }
 
@@ -42,13 +47,13 @@ void Robot_Logic::Go_Towards_Beacon () {
 
 
 void Robot_Logic::Move_Forward () {
- /* Robot_Logic::Move
+ /* Robot_Logic::Move_Forward
   * 
-  * goes forward for this->process_time / 20 seconds or until there is something ahead (whichever one is quicker)
+  * goes forward for (process_time / 20) seconds or until there is something ahead (whichever one is quicker)
   * 
-  * before calling it, please set the process_time.
+  * before calling it, please set the process_time to the nedded value.
   */
-    if (process_time == 0)
+    if (process_time <= 0)
         this->process_id = 0;
         return;
 
