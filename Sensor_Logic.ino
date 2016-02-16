@@ -4,35 +4,39 @@
  *  Defines methods in Sensor_Lobic.h
  */
 
-#define pit_danger_threshold 255
+// defining array indecies, so that it is very clear, what I am refering to.
+#define RIGHT 0
+#define LEFT 1
+#define MIDDLE 2
+#define RIGHT_PIT 3
+#define LEFT_PIT 4
+#define BEACON_DIRECTION 5
+
+#define pit_danger 255
 
 #define obstacle_proximity_warning 255
 #define obstacle_proximity_danger 123
 
 Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sensor *middle_sensor,
                             Sensor *left_sensor, Sensor *right_pit_sensor, Sensor *left_pit_sensor) {
-    
-    this->beacon_direction = beacon_direction;
-    this->right_sensor = right_sensor;
-    this->middle_sensor = middle_sensor;
-    this->left_sensor = left_sensor;
-    this->right_pit_sensor = right_pit_sensor;
-    this->left_pit_sensor = left_pit_sensor;
+
+    this->sensor[RIGHT] = right_sensor;
+    this->sensor[LEFT] = left_sensor;
+    this->sensor[MIDDLE] = middle_sensor;
+
+    this->sensor[RIGHT_PIT] = right_pit_sensor;
+    this->sensor[LEFT_PIT] = left_pit_sensor;
+
+    this->sensor[BEACON_DIRECTION] = beacon_direction;
 }
 
 void Sensor_Logic::Update_Sensors() {
-    this->beacon_direction->Update_Value();
-    
-    this->right_sensor->Update_Value();
-    this->middle_sensor->Update_Value();
-    this->left_sensor->Update_Value();
-
-    this->right_pit_sensor->Update_Value();
-    this->left_pit_sensor->Update_Value();
+    for (int i = 0; i < 6; i++)
+        this->sensor[i]->Update_Value();
 }
 
 int Sensor_Logic::Get_Beacon_Direction() {
-    return this->beacon_direction->Get_Value();
+    return 0;
 }
 
 int Sensor_Logic::Get_Danger_ID () {

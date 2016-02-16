@@ -31,14 +31,29 @@ void Robot_Logic::main () {
     if (this->danger_id > this->process_id)
         this->process_id = this->danger_id;
 
+    Serial.print ("I am starting/continiuing doing process #");
+    Serial.println (process_id);
+
     (this->*Tasks[process_id])();
 }
 
 void Robot_Logic::Go_Towards_Beacon () {
 }
 
+
 void Robot_Logic::Move_Forward () {
-    this->process_id = 0;
+ /* Robot_Logic::Move
+  * 
+  * goes forward for this->process_time / 20 seconds or until there is something ahead (whichever one is quicker)
+  * 
+  * before calling it, please set the process_time.
+  */
+    if (process_time == 0)
+        this->process_id = 0;
+        return;
+
+    process_time -= 1;
+    this->control->Move_Forward();
 }
 
 void Robot_Logic::Avoid_Possible_Obstacle_On_Side () {

@@ -6,13 +6,7 @@
 
 class Sensor_Logic {
     private:
-        Sensor *beacon_direction;
-        Sensor *middle_sensor,
-               *left_sensor,
-               *right_sensor,
-               *left_pit_sensor,
-               *right_pit_sensor;
-
+        Sensor *sensor[6];
         int danger_id, side_id;
     public:
         Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sensor *middle_sensor,

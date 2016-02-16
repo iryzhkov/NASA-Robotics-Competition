@@ -11,7 +11,8 @@ class Robot_Logic {
         Movement_Control *control;
         Sensor_Logic *sensors;
 
-        int process_id, subprocess_id, danger_id, side_id;
+        int process_id, subprocess_id, process_time,
+            danger_id, side_id;
         
         Control_Function Tasks[7];
         

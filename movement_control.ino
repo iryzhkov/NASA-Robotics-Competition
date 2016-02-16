@@ -24,8 +24,18 @@ Movement_Control::Movement_Control (int left_PWM_pin, int left_DIR_pin, int righ
     this->right_Motor = new Motor(right_PWM_pin, right_DIR_pin);
 }
 
+void Movement_Control::Move_Forward () {
+   /*  Movement_Control::Stop():
+    *   
+    *  stops the movement of the robot by setting PWM of both motors to 0.
+    */
+   
+    left_Motor->set_PWM(0);
+    right_Motor->set_PWM(0);
+}
+
 void Movement_Control::Stop () {
-   /*  Stop():
+   /*  Movement_Controll::Stop():
     *   
     *  stops the movement of the robot by setting PWM of both motors to 0.
     */

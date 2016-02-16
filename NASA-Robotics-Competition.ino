@@ -15,10 +15,10 @@
 // Global variables
 Robot_Logic       *robot;
 
-Movement_Control  *drive_Control;
+Movement_Control  *drive_control;
 
-Motor             *left_Motor,
-                  *right_Motor;
+Motor             *left_motor,
+                  *right_motor;
 
 Sensor_Logic      *sensor_logic;     
 
@@ -35,11 +35,11 @@ void setup() {
     Serial.begin(9600); 
 
     // setting up the motors
-    left_Motor = new Motor (left_motor_pwm_pin, left_motor_dir_pin);
-    right_Motor = new Motor (right_motor_pwm_pin, right_motor_dir_pin);
+    left_motor = new Motor (left_motor_pwm_pin, left_motor_dir_pin);
+    right_motor = new Motor (right_motor_pwm_pin, right_motor_dir_pin);
 
     // setting up Movement_Control
-    drive_Control = new Movement_Control(left_Motor, right_Motor);
+    drive_control = new Movement_Control(left_motor, right_motor);
 
     // setting up IR sensors
     left_pit_sensor = new Sensor(left_pit_sensor_pin);
@@ -52,11 +52,10 @@ void setup() {
     beacon_direction = new Sensor(direction_pin);
 
     // setting up sensor logic
-    // !!! have to add more to this (The IR sensors, all of them).
     sensor_logic = new Sensor_Logic (beacon_direction, right_sensor, middle_sensor, left_sensor, right_pit_sensor, left_pit_sensor);
     
     // setting up robot logic
-    robot = new Robot_Logic (drive_Control, sensor_logic);
+    robot = new Robot_Logic (drive_control, sensor_logic);
 }
 
 void loop() {
