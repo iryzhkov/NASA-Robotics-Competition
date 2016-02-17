@@ -17,9 +17,11 @@ class Movement_Control {
     void Move_Forward ();
     void Move_Backward ();
 
+    void Turn (int side);
     void Turn_Left ();
     void Turn_Right ();
 
+    void Differential_Turn (int side);
     void Differential_Turn_Left ();
     void Differential_Turn_Right ();
 };
