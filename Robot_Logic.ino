@@ -30,8 +30,10 @@ void Robot_Logic::Update_Sensors () {
 void Robot_Logic::main () {
     this->sensors->Update_Sensors();
   
-    if (this->danger_id > this->process_id)
+    if (this->danger_id > this->process_id) {
         this->process_id = this->danger_id;
+        this->subprocess_id = 0;
+    }
 
     Serial.print ("I am starting/continiuing doing process #");
     Serial.println (process_id);
@@ -49,12 +51,13 @@ void Robot_Logic::Go_Towards_Beacon () {
 
 
 void Robot_Logic::Move_Forward () {
- /* Robot_Logic::Move_Forward
-  * 
-  * goes forward for (process_time / 20) seconds or until there is something ahead (whichever one is quicker)
-  * 
-  * before calling it, please set the process_time to the nedded value.
-  */
+  /* Robot_Logic::Move_Forward
+   * 
+   * goes forward for (process_time / 20) seconds or until there is something ahead (whichever one is quicker)
+   * 
+   * before calling it, please set the process_time to the nedded value.
+   */
+    
     if (process_time <= 0)
         this->process_id = 0;
         return;
@@ -64,7 +67,32 @@ void Robot_Logic::Move_Forward () {
 }
 
 void Robot_Logic::Avoid_Possible_Obstacle_On_Side () {
-    this->process_id = 1;
+    // This will be the usual look of the functions with several subprocesses. 
+    // At subprocess 0 we initialize, and set subproces to 1
+    // At subprocess 1 we do 1 step, if we finished the step, we either change subprocess anr process id.
+    // Same for other integers.
+  
+    switch (this->subprocess_id) {
+    case 0: {
+        this->process_time = 20;
+        this->subprocess_id = 1;
+    };
+    case 1: {     
+        // take 50 miliseconds away from requierd time
+        // and set controls to do the turn towards the side without obstacles
+        this->process_time -= 1;
+        this->control->Differential_Turn(this->side_id);
+
+        // if we are finished exit this process.
+        if (this->process_time <= 0) {
+          
+            // Start going forward for some time
+            this->process_time = 10;
+            this->process_id = 1;
+            break;
+        }
+    };
+    }
 }
 
 void Robot_Logic::Avoid_Definite_Obstacle_On_Side () {

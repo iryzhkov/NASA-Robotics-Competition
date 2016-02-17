@@ -35,21 +35,21 @@ void setup() {
     Serial.begin(9600); 
 
     // setting up the motors
-    left_motor = new Motor (left_motor_pwm_pin, left_motor_dir_pin);
-    right_motor = new Motor (right_motor_pwm_pin, right_motor_dir_pin);
+    left_motor = new Motor (LEFT_MOTOR_PWM_PIN, LEFT_MOTOR_DIR_PIN);
+    right_motor = new Motor (RIGHT_MOTOR_PWM_PIN, RIGHT_MOTOR_DIR_PIN);
 
     // setting up Movement_Control
     drive_control = new Movement_Control(left_motor, right_motor);
 
     // setting up IR sensors
-    left_pit_sensor = new Sensor(left_pit_sensor_pin);
-    right_pit_sensor = new Sensor(right_pit_sensor_pin);
-    left_sensor = new Sensor(left_sensor_pin);
-    right_sensor = new Sensor(right_sensor_pin);
-    middle_sensor = new Sensor(middle_sensor_pin);
+    left_pit_sensor = new Sensor(LEFT_PIT_SENSOR_PIN);
+    right_pit_sensor = new Sensor(RIGHT_PIT_SENSOR_PIN);
+    left_sensor = new Sensor(LEFT_SENSOR_PIN);
+    right_sensor = new Sensor(RIGHT_SENSOR_PIN);
+    middle_sensor = new Sensor(MIDDLE_SENSOR_PIN);
 
     // setting up compass and beacon sensors
-    beacon_direction = new Sensor(direction_pin);
+    beacon_direction = new Sensor(DIRECTION_SENSOR_PIN);
 
     // setting up sensor logic
     sensor_logic = new Sensor_Logic (beacon_direction, right_sensor, middle_sensor, left_sensor, right_pit_sensor, left_pit_sensor);

@@ -9,16 +9,16 @@
 // TODO: Capitalize all defines.
 
 // declaration of motor pins
-#define right_motor_dir_pin 11
-#define right_motor_pwm_pin 6
-#define left_motor_dir_pin 12
-#define left_motor_pwm_pin 5
+#define RIGHT_MOTOR_DIR_PIN 11
+#define RIGHT_MOTOR_PWM_PIN 6
+#define LEFT_MOTOR_DIR_PIN 12
+#define LEFT_MOTOR_PWM_PIN 5
 
 // declaration of sensor pins
-#define left_pit_sensor_pin A0
-#define right_pit_sensor_pin A1
-#define left_sensor_pin A2
-#define right_sensor_pin A3
-#define middle_sensor_pin A4
+#define LEFT_PIT_SENSOR_PIN A0
+#define RIGHT_PIT_SENSOR_PIN A1
+#define LEFT_SENSOR_PIN A2
+#define RIGHT_SENSOR_PIN A3
+#define MIDDLE_SENSOR_PIN A4
 
-#define direction_pin A5
+#define DIRECTION_SENSOR_PIN A5
