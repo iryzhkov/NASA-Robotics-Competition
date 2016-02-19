@@ -35,6 +35,7 @@ class Robot_Logic {
         void Avoid_Pit_On_Side ();
         void Avoid_Pit_In_Front ();
 
+        void Set_Process_ID (int value);
         int Get_Process_ID ();
         int Get_Subprocess_ID ();
 

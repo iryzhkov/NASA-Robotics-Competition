@@ -1,9 +1,9 @@
 /*  CODE FOR NASA ROBOTICS CHALLANGE 2016
-    by Igor Ryzhkov (igor.o.ryzhkov@gmail.com)
-
-    Header for Movement_Control class. Allows easy control of the robot's movements.
-*/
-
+ *  by Igor Ryzhkov (igor.o.ryzhkov@gmail.com)
+ *  
+ *  Header for Movement_Control class. Allows easy control of the robot's movements.
+ */ 
+ 
 class Movement_Control {
   private:
     Motor *left_Motor,

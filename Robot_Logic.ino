@@ -21,6 +21,13 @@ Robot_Logic::Robot_Logic (Movement_Control *control, Sensor_Logic *sensors) {
 
 void Robot_Logic::Set_Testing (bool value) {
     this->sensors->Set_Testing(value);
+
+    if (value == false)
+        this->process_id = 0;
+}
+
+void Robot_Logic::Set_Process_ID (int value) {
+    this->process_id = value;
 }
 
 int Robot_Logic::Get_Process_ID () {
