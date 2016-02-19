@@ -37,4 +37,6 @@ class Robot_Logic {
 
         int Get_Process_ID ();
         int Get_Subprocess_ID ();
+
+        void Set_Testing (bool value);
 };

@@ -25,4 +25,6 @@ class Sensor_Logic {
         
         int Get_Danger_ID ();
         int Get_Side_ID ();
+
+        void Set_Testing (bool value);
 };

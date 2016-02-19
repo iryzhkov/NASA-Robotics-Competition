@@ -19,6 +19,10 @@ Robot_Logic::Robot_Logic (Movement_Control *control, Sensor_Logic *sensors) {
     this->Tasks[6] = &Robot_Logic::Avoid_Pit_In_Front;
 }
 
+void Robot_Logic::Set_Testing (bool value) {
+    this->sensors->Set_Testing(value);
+}
+
 int Robot_Logic::Get_Process_ID () {
     return this->process_id;
 }

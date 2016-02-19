@@ -30,6 +30,11 @@ Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sens
     this->sensor[BEACON_DIRECTION] = beacon_direction;
 }
 
+void Sensor_Logic::Set_Testing (bool value) {
+    for (int i = 0; i < NUM_SENSORS; i++)
+        this->sensor[i]->Set_Testing (value);
+}
+
 int Sensor_Logic::Get_Danger_Code_For_Sensor (int which_sensor) {
     int result = 0;
 

@@ -6,11 +6,34 @@
  *  Used to quickly test the program before it enters loop();
  */
 
- test (process_priorities) {
+test (process_priorities) {
     fail();
- }
+}
 
- test (correct_danger_id){
+test (correct_danger_id_for_no_dangers){
     fail();
- }
+}
 
+test (correct_danger_id_for_far_obstacle){
+    fail();
+}
+
+test (correct_side_id_for_far_obstacle) {
+    fail();
+}
+
+test (correct_danger_id_for_close_obstacles){
+    fail();
+}
+
+test (correct_side_id_for_close_obstacles){
+    fail();
+}
+
+test (correct_danger_id_for_pit){
+    fail();
+}
+
+test (correct_side_id_for_pit){
+    fail();
+}

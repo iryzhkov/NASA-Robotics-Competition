@@ -17,6 +17,12 @@
 // library link: https://github.com/mmurdoch/arduinounit
 #include <ArduinoUnit.h>
 
+// debugging setting
+// set to true if you want to run tests on the project
+// set to false if you are confident in the program
+// only adds 4% to program storage space. (we won't use more than 30%).
+// does not interfere with the loop()
+// please always keep true.
 #define DEBUGGING true
 
 // Global variables
@@ -49,24 +55,14 @@ void setup() {
     drive_control = new Movement_Control(left_motor, right_motor);
 
     // setting up IR sensors with the testing settings
-    left_pit_sensor = new Sensor(LEFT_PIT_SENSOR_PIN);
-    left_pit_sensor->Set_Testing(DEBUGGING);
-    
-    right_pit_sensor = new Sensor(RIGHT_PIT_SENSOR_PIN);
-    right_pit_sensor->Set_Testing(DEBUGGING);
-    
+    left_pit_sensor = new Sensor(LEFT_PIT_SENSOR_PIN);   
+    right_pit_sensor = new Sensor(RIGHT_PIT_SENSOR_PIN); 
     left_sensor = new Sensor(LEFT_SENSOR_PIN);
-    left_sensor->Set_Testing(DEBUGGING);
-    
     right_sensor = new Sensor(RIGHT_SENSOR_PIN);
-    right_sensor->Set_Testing(DEBUGGING);
-    
     middle_sensor = new Sensor(MIDDLE_SENSOR_PIN);
-    middle_sensor->Set_Testing(DEBUGGING);
 
     // setting up compass and beacon sensors
     beacon_direction = new Sensor(DIRECTION_SENSOR_PIN);
-    beacon_direction->Set_Testing(DEBUGGING);
 
     // setting up sensor logic
     sensor_logic = new Sensor_Logic (beacon_direction, right_sensor, middle_sensor, left_sensor, right_pit_sensor, left_pit_sensor);
@@ -74,17 +70,16 @@ void setup() {
     // setting up robot logic
     robot = new Robot_Logic (drive_control, sensor_logic);
 
-    // running the unit tests if we are debbuging the program
+    // running unit tests if we are debbuging the program
     if (DEBUGGING) {
+        // setting robot to testing mode
+        robot->Set_Testing(true);
+
+        // running all the tests
         Test::run();
 
-        // Setting sensors back to normal, when we are finished testing.
-        left_pit_sensor->Set_Testing(false);
-        right_pit_sensor->Set_Testing(false);
-        left_sensor->Set_Testing(false);
-        right_sensor->Set_Testing(false);
-        middle_sensor->Set_Testing(false);
-        beacon_direction->Set_Testing(false);
+        // setting robot back to regular mode
+        robot->Set_Testing(false);
     }
 }
 
