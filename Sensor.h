@@ -8,8 +8,11 @@ class Sensor {
     protected:
         int sensor_value;
         byte sensor_pin;
+        bool testing;
     public:
         Sensor (byte sensor_pin);
         void Update_Value ();
         int  Get_Value ();
+        void Set_Value (int value);
+        void Set_Testing (bool value);
 };

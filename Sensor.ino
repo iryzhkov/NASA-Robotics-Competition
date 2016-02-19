@@ -18,7 +18,7 @@ Sensor::Sensor (byte pin) {
   *  
   * Set pin for recieving, and save it it.
   */
-  
+    testing = false;
     this->sensor_pin = pin;
     pinMode (pin, INPUT);
 }
@@ -28,6 +28,26 @@ void Sensor::Update_Value() {
   *  
   * read the value from the pin.
   */
-  
-    this->sensor_value = analogRead(this->sensor_pin); 
+
+    if (!this->testing)
+        this->sensor_value = analogRead(this->sensor_pin); 
 }
+
+void Sensor::Set_Value(int value) {
+  /* Sensor::Update_Value():
+  *  
+  * set the value.
+  */
+
+  if (this->testing)
+    this->sensor_value = value; 
+}
+
+void Sensor::Set_Testing (bool value) {
+  /* Sensor::Update_Value():
+  *  
+  * set the testing value.
+  */
+  this->testing = value;
+}
+

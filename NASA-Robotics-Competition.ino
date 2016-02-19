@@ -14,6 +14,7 @@
 
 // library for testing the program
 // need to run all tests in setup().
+// library link: https://github.com/mmurdoch/arduinounit
 #include <ArduinoUnit.h>
 
 #define DEBUGGING true
@@ -49,10 +50,19 @@ void setup() {
 
     // setting up IR sensors
     left_pit_sensor = new Sensor(LEFT_PIT_SENSOR_PIN);
+    left_pit_sensor->Set_Testing(DEBUGGING);
+    
     right_pit_sensor = new Sensor(RIGHT_PIT_SENSOR_PIN);
+    right_pit_sensor->Set_Testing(DEBUGGING);
+    
     left_sensor = new Sensor(LEFT_SENSOR_PIN);
+    left_sensor->Set_Testing(DEBUGGING);
+    
     right_sensor = new Sensor(RIGHT_SENSOR_PIN);
+    right_sensor->Set_Testing(DEBUGGING);
+    
     middle_sensor = new Sensor(MIDDLE_SENSOR_PIN);
+    middle_sensor->Set_Testing(DEBUGGING);
 
     // setting up compass and beacon sensors
     beacon_direction = new Sensor(DIRECTION_SENSOR_PIN);
@@ -64,8 +74,16 @@ void setup() {
     robot = new Robot_Logic (drive_control, sensor_logic);
 
     // running the unit tests if we are debbuging the program
-    if (DEBUGGING)
-      Test::run();
+    if (DEBUGGING) {
+        Test::run();
+
+        // Setting sensors back to normal, when we are finished testing.
+        left_pit_sensor->Set_Testing(false);
+        right_pit_sensor->Set_Testing(false);
+        left_sensor->Set_Testing(false);
+        right_sensor->Set_Testing(false);
+        middle_sensor->Set_Testing(false);
+    }
 }
 
 void loop() {
