@@ -48,7 +48,7 @@ void setup() {
     // setting up Movement_Control
     drive_control = new Movement_Control(left_motor, right_motor);
 
-    // setting up IR sensors
+    // setting up IR sensors with the testing settings
     left_pit_sensor = new Sensor(LEFT_PIT_SENSOR_PIN);
     left_pit_sensor->Set_Testing(DEBUGGING);
     
@@ -66,6 +66,7 @@ void setup() {
 
     // setting up compass and beacon sensors
     beacon_direction = new Sensor(DIRECTION_SENSOR_PIN);
+    beacon_direction->Set_Testing(DEBUGGING);
 
     // setting up sensor logic
     sensor_logic = new Sensor_Logic (beacon_direction, right_sensor, middle_sensor, left_sensor, right_pit_sensor, left_pit_sensor);
@@ -83,6 +84,7 @@ void setup() {
         left_sensor->Set_Testing(false);
         right_sensor->Set_Testing(false);
         middle_sensor->Set_Testing(false);
+        beacon_direction->Set_Testing(false);
     }
 }
 
