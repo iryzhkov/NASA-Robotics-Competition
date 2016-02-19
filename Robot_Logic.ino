@@ -53,24 +53,11 @@ void Robot_Logic::Go_Towards_Beacon () {
    * 
    * I didn't decide if I am going to use regular or differential turn.
    */
-   
-    switch (this->subprocess_id) {
-    case 0: {
-        // check if we are facing withing error
-        // if not, start subporcess 1 or 2
-        // depending on the side
-    };
-    
-    // case 1 is when we are a little bit to the left of the beacon
-    case 1: {
-        this->subprocess_id = 0;
-    };
 
-    // case 2 is when we are a little bit to the right of the beacon
-    case 2: {
-         this->subprocess_id = 0;
-    };
-    }
+    // This takes care of all the cases conected with going towards the beacon. 
+    // Isn't it just beautiful?
+    this->subprocess_id = this->sensors->Get_Beacon_Direction();
+    this->control->Move_Forward();
 }
 
 

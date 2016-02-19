@@ -66,6 +66,10 @@ void Sensor_Logic::Update_Sensors() {
 }
 
 int Sensor_Logic::Get_Beacon_Direction() {
+    // Returns 0 if we are withing 15 deg from the beacon
+    // Returns -1 if we are too left
+    // return 1 if we are too right
+    
     return 0;
 }
 
