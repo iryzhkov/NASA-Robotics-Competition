@@ -4,6 +4,19 @@
  *  This class assumes the configuration of sensors, that we have for the robot. 
  */
 
+ // defining array indecies, so that it is very clear, what I am refering to.
+#define RIGHT 0
+#define LEFT 1
+#define MIDDLE 2
+#define RIGHT_PIT 3
+#define LEFT_PIT 4
+#define BEACON_DIRECTION 5
+
+#define  PIT_DANGER 300
+
+#define OBSTACLE_WARNING 150
+#define OBSTACLE_DANGER 600
+
 #define NUM_SENSORS 8
 
 class Sensor_Logic {

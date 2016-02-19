@@ -4,19 +4,6 @@
  *  Defines methods in Sensor_Lobic.h
  */
 
-// defining array indecies, so that it is very clear, what I am refering to.
-#define RIGHT 0
-#define LEFT 1
-#define MIDDLE 2
-#define RIGHT_PIT 3
-#define LEFT_PIT 4
-#define BEACON_DIRECTION 5
-
-#define  PIT_DANGER 300
-
-#define OBSTACLE_WARNING 150
-#define OBSTACLE_DANGER 600
-
 Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sensor *middle_sensor,
                             Sensor *left_sensor, Sensor *right_pit_sensor, Sensor *left_pit_sensor) {
 

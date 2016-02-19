@@ -10,8 +10,8 @@
  */
 
 void Set_To_Zero_State () {
-    left_pit_sensor->Set_Value(0);
-    right_pit_sensor->Set_Value(0);
+    left_pit_sensor->Set_Value(PIT_DANGER+5);
+    right_pit_sensor->Set_Value(PIT_DANGER+5);
     left_sensor->Set_Value(0);
     right_sensor->Set_Value(0);
     middle_sensor->Set_Value(0);
@@ -22,17 +22,36 @@ void Set_To_Zero_State () {
 
 test (correct_danger_id_for_no_dangers){
     Set_To_Zero_State();
-    fail();
+    sensor_logic->Update_Sensors();
+    assertEqual(0, sensor_logic->Get_Danger_ID());
 }
 
 test (correct_danger_id_for_far_obstacle){
     Set_To_Zero_State();
-    fail();
+    left_sensor->Set_Value(OBSTACLE_WARNING+5);
+    sensor_logic->Update_Sensors();
+  
+    assertEqual(2, sensor_logic->Get_Danger_ID());
+
+    right_sensor->Set_Value(OBSTACLE_WARNING+5);
+    left_sensor->Set_Value(0);
+    sensor_logic->Update_Sensors();
+
+    assertEqual(2, sensor_logic->Get_Danger_ID());
 }
 
 test (correct_side_id_for_far_obstacle) {
     Set_To_Zero_State();
-    fail();
+    left_sensor->Set_Value(OBSTACLE_WARNING+5);
+    sensor_logic->Update_Sensors();
+  
+    assertEqual(1, sensor_logic->Get_Side_ID());
+
+    right_sensor->Set_Value(OBSTACLE_WARNING+5);
+    left_sensor->Set_Value(0);
+    sensor_logic->Update_Sensors();
+
+    assertEqual(-1, sensor_logic->Get_Side_ID());
 }
 
 test (correct_danger_id_for_close_obstacles){
