@@ -3,6 +3,12 @@
  *  
  *  Defines unit tests for this project
  *  
+ *  Seems like this code takes up most of the program space. 
+ *  
+ *  When all code is tested, we should comment out this testing code. (in case we run into memory issues)
+ *  
+ *  I think it 
+ *  
  *  Used to quickly test the program before it enters loop();
  *  
  *  Uses library for testing
@@ -56,12 +62,30 @@ test (correct_side_id_for_far_obstacle) {
 
 test (correct_danger_id_for_close_obstacles){
     Set_To_Zero_State();
-    fail();
+    left_sensor->Set_Value(OBSTACLE_DANGER+5);
+    sensor_logic->Update_Sensors();
+  
+    assertEqual(3, sensor_logic->Get_Danger_ID());
+
+    right_sensor->Set_Value(OBSTACLE_DANGER+5);
+    left_sensor->Set_Value(0);
+    sensor_logic->Update_Sensors();
+
+    assertEqual(3, sensor_logic->Get_Danger_ID());
 }
 
 test (correct_side_id_for_close_obstacles){
     Set_To_Zero_State();
-    fail();
+    left_sensor->Set_Value(OBSTACLE_DANGER+5);
+    sensor_logic->Update_Sensors();
+  
+    assertEqual(1, sensor_logic->Get_Side_ID());
+
+    right_sensor->Set_Value(OBSTACLE_DANGER+5);
+    left_sensor->Set_Value(0);
+    sensor_logic->Update_Sensors();
+
+    assertEqual(-1, sensor_logic->Get_Side_ID());
 }
 
 test (correct_danger_id_for_pit){

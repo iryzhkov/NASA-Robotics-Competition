@@ -20,7 +20,7 @@
 // debugging setting
 // set to true if you want to run tests on the project
 // set to false if you are confident in the program
-// only adds 4% to program storage space. (we won't use more than 50%).
+// only adds 4% to program storage space. (we won't use more than 80%).
 // does not interfere with the loop()
 // please always keep true.
 #define DEBUGGING true
