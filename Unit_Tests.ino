@@ -5,9 +5,7 @@
  *  
  *  Seems like this code takes up most of the program space. 
  *  
- *  When all code is tested, we should comment out this testing code. (in case we run into memory issues)
- *  
- *  I think it 
+ *  When all code is tested, we could comment out this testing code, in case we run into memory issues.
  *  
  *  Used to quickly test the program before it enters loop();
  *  
