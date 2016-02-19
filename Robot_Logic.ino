@@ -19,6 +19,13 @@ Robot_Logic::Robot_Logic (Movement_Control *control, Sensor_Logic *sensors) {
     this->Tasks[6] = &Robot_Logic::Avoid_Pit_In_Front;
 }
 
+int Robot_Logic::Get_Process_ID () {
+    return this->process_id;
+}
+
+int Robot_Logic::Get_Subprocess_ID () {
+    return this->subprocess_id;
+}
 
 void Robot_Logic::Update_Sensors () {
     this->sensors->Update_Sensors();
@@ -34,9 +41,6 @@ void Robot_Logic::main () {
         this->process_id = this->danger_id;
         this->subprocess_id = 0;
     }
-
-    Serial.print ("I am starting/continiuing doing process #");
-    Serial.println (process_id);
 
     // Don't freak out about the next line of code.
     // It calls a function from the array

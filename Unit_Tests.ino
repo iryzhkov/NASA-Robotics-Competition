@@ -3,5 +3,14 @@
  *  
  *  Defines unit tests for this project
  *  
- *  Used to quickly test the program.
+ *  Used to quickly test the program before it enters loop();
  */
+
+ test (process_priorities) {
+    fail();
+ }
+
+ test (correct_danger_id){
+    fail();
+ }
+
