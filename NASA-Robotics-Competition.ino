@@ -12,6 +12,12 @@
 #include "Sensor_Logic.h"
 #include "Robot_Logic.h"
 
+// library for testing the program
+// need to run all tests in setup().
+#include <ArduinoUnit.h>
+
+#define DEBUGGING true
+
 // Global variables
 Robot_Logic       *robot;
 
@@ -56,6 +62,10 @@ void setup() {
     
     // setting up robot logic
     robot = new Robot_Logic (drive_control, sensor_logic);
+
+    // running the unit tests if we are debbuging the program
+    if (DEBUGGING)
+      Test::run();
 }
 
 void loop() {

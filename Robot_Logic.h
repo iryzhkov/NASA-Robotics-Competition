@@ -4,6 +4,8 @@
  *  This is Robot_Logic header. Does all the logic for the robot control.
  */
 
+#define NUM_FUNCTIONS
+
 class Robot_Logic {
     typedef void (Robot_Logic::*Control_Function)();
     
@@ -14,7 +16,7 @@ class Robot_Logic {
         int process_id, subprocess_id, process_time,
             danger_id, side_id;
         
-        Control_Function Tasks[7];
+        Control_Function Tasks[NUM_FUNCTIONS];
         
     public:
         Robot_Logic (Movement_Control *control, Sensor_Logic *sensors);
