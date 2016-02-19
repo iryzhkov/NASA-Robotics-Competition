@@ -56,8 +56,9 @@ void Robot_Logic::Go_Towards_Beacon () {
 
     // This takes care of all the cases conected with going towards the beacon. 
     // Isn't it just beautiful?
+    
     this->subprocess_id = this->sensors->Get_Beacon_Direction();
-    this->control->Move_Forward();
+    this->control->Differential_Turn(this->subprocess_id);
 }
 
 

@@ -25,6 +25,9 @@ Movement_Control::Movement_Control (int left_PWM_pin, int left_DIR_pin, int righ
 }
 
 void Movement_Control::Turn (int side) {
+    if (side == 0)
+        this->Move_Forward();
+  
     if (side == -1)
         this->Turn_Left();
 
@@ -59,6 +62,9 @@ void Movement_Control::Turn_Right () {
 }
 
 void Movement_Control::Differential_Turn (int side) {
+    if (side == 0)
+        this->Move_Forward();
+  
     if (side == -1)
         this->Differential_Turn_Left();
 
