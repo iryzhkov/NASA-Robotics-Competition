@@ -6,15 +6,18 @@
  *  Now it is very easy to change them. So easy.
  */ 
 
-// TODO: Capitalize all defines.
-
 // declaration of motor pins
 #define RIGHT_MOTOR_DIR_PIN 11
 #define RIGHT_MOTOR_PWM_PIN 6
 #define LEFT_MOTOR_DIR_PIN 12
 #define LEFT_MOTOR_PWM_PIN 5
 
+ 
 // declaration of sensor pins
+#define LEFT_TOUCH_SENSOR 3
+#define RIGHT_TOUCH_SENSOR 4
+
+// used up all analog input pins. be carefull.
 #define LEFT_PIT_SENSOR_PIN A0
 #define RIGHT_PIT_SENSOR_PIN A1
 #define LEFT_SENSOR_PIN A2

@@ -4,7 +4,7 @@
  *  This class assumes the configuration of sensors, that we have for the robot. 
  */
 
-#define NUM_SENSORS 6
+#define NUM_SENSORS 8
 
 class Sensor_Logic {
     private:
