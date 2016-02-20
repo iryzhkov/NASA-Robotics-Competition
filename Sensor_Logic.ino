@@ -15,6 +15,32 @@ Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sens
     this->sensor[LEFT_PIT] = left_pit_sensor;
 
     this->sensor[BEACON_DIRECTION] = beacon_direction;
+
+    danger_code_updates[0] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
+    danger_code_updates[1] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
+    danger_code_updates[2] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
+    danger_code_updates[3] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
+    danger_code_updates[4] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
+    danger_code_updates[5] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
+    danger_code_updates[6] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
+    danger_code_updates[7] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
+    danger_code_updates[8] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
+}
+
+void Sensor_Logic::Danger_Check_For_Far_Obstacle () {
+    if (this->sensor_danger_code[RIGHT] == 1 || this->sensor_danger_code[LEFT] == 1) {
+        this->danger_id = 2;
+
+        if (this->sensor_danger_code[RIGHT] == 1)
+            this->side_id = -1;
+        else
+            this->side_id = 1;
+    }
+    
+    if (this->sensor_danger_code[RIGHT] == 1 && this->sensor_danger_code[LEFT] == 1) {
+        this->danger_id = 3;
+        this->side_id = 0;
+    }
 }
 
 void Sensor_Logic::Set_Testing (bool value) {
@@ -59,22 +85,8 @@ void Sensor_Logic::Update_Sensors() {
     this->danger_id = 0;
     this->side_id = 0;
 
-    // should create array of checkers for clarity of code
-    if (this->sensor_danger_code[RIGHT] == 1 || this->sensor_danger_code[LEFT] == 1) {
-        this->danger_id = 2;
-
-        if (this->sensor_danger_code[RIGHT] == 1)
-            this->side_id = -1;
-        else
-            this->side_id = 1;
-    }
-    
-    if (this->sensor_danger_code[RIGHT] == 1 && this->sensor_danger_code[LEFT] == 1) {
-        this->danger_id = 3;
-        this->side_id = 0;
-    }
-
-    
+    for (int i = 0; i < NUM_DANGER_UPDATES; i++)
+      (this->*this->danger_code_updates[i])();    
 }
 
 int Sensor_Logic::Get_Beacon_Direction() {
