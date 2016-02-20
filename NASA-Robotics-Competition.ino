@@ -19,7 +19,7 @@
 
 // debugging setting
 // set to true if you want to run software tests on the project
-// set to false if you want to test program with real data. (need real sensors for it)
+// set to false if you want to run hardware tests on the project
 #define DEBUGGING true
 
 // Global variables
@@ -38,7 +38,6 @@ Sensor            *left_pit_sensor,
                   *right_sensor,
                   *middle_sensor,
                   *beacon_direction;
-
 
 void setup() {
     // starting serial communication.
@@ -80,7 +79,8 @@ void loop() {
         // setting robot back to regular mode
         robot->Set_Testing(false);
     }
-    
-    robot->main();
-    delay(50);
+    else {
+        robot->main();
+        delay(200);
+    }
 }

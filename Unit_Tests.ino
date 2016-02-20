@@ -24,13 +24,13 @@ void Set_To_Zero_State () {
     robot->Set_Process_ID (0);
 }
 
-test (correct_danger_id_for_no_dangers){
+test (no_dangers){
     Set_To_Zero_State();
     sensor_logic->Update_Sensors();
     assertEqual(0, sensor_logic->Get_Danger_ID());
 }
 
-test (correct_danger_id_for_far_obstacle){
+test (danger_far_obstacle){
     Set_To_Zero_State();
     left_sensor->Set_Value(OBSTACLE_WARNING+5);
     sensor_logic->Update_Sensors();
@@ -44,7 +44,7 @@ test (correct_danger_id_for_far_obstacle){
     assertEqual(2, sensor_logic->Get_Danger_ID());
 }
 
-test (correct_side_id_for_far_obstacle) {
+test (side_far_obstacle) {
     Set_To_Zero_State();
     left_sensor->Set_Value(OBSTACLE_WARNING+5);
     sensor_logic->Update_Sensors();
@@ -58,7 +58,7 @@ test (correct_side_id_for_far_obstacle) {
     assertEqual(-1, sensor_logic->Get_Side_ID());
 }
 
-test (correct_danger_id_for_close_obstacles){
+test (danger_close_obstacles){
     Set_To_Zero_State();
     left_sensor->Set_Value(OBSTACLE_DANGER+5);
     sensor_logic->Update_Sensors();
@@ -72,7 +72,7 @@ test (correct_danger_id_for_close_obstacles){
     assertEqual(3, sensor_logic->Get_Danger_ID());
 }
 
-test (correct_side_id_for_close_obstacles){
+test (side_close_obstacles){
     Set_To_Zero_State();
     left_sensor->Set_Value(OBSTACLE_DANGER+5);
     sensor_logic->Update_Sensors();
@@ -86,12 +86,34 @@ test (correct_side_id_for_close_obstacles){
     assertEqual(-1, sensor_logic->Get_Side_ID());
 }
 
-test (correct_danger_id_for_pit){
-    Set_To_Zero_State();
-    fail();
+test (danger_pit){
+    left_pit_sensor->Set_Value(PIT_DANGER-5);
+    sensor_logic->Update_Sensors();
+  
+    assertEqual(6, sensor_logic->Get_Danger_ID());
+
+    right_pit_sensor->Set_Value(PIT_DANGER-5);
+    left_pit_sensor->Set_Value(PIT_DANGER+5);
+    sensor_logic->Update_Sensors();
+
+    assertEqual(6, sensor_logic->Get_Danger_ID());
 }
 
-test (correct_side_id_for_pit){
-    Set_To_Zero_State();
-    fail();
+test (side_pit){
+    left_pit_sensor->Set_Value(PIT_DANGER-5);
+    sensor_logic->Update_Sensors();
+  
+    assertEqual(1, sensor_logic->Get_Side_ID());
+
+    right_pit_sensor->Set_Value(PIT_DANGER-5);
+    left_pit_sensor->Set_Value(PIT_DANGER+5);
+    sensor_logic->Update_Sensors();
+
+    assertEqual(-1, sensor_logic->Get_Side_ID());
+}
+
+test (danger_middle) {
+}
+
+test (side_middle) {
 }

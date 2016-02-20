@@ -4,6 +4,8 @@
  *  Defines methods in Sensor_Lobic.h
  */
 
+// TODO: Add function comments
+
 Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sensor *middle_sensor,
                             Sensor *left_sensor, Sensor *right_pit_sensor, Sensor *left_pit_sensor) {
 

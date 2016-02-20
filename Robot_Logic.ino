@@ -53,13 +53,15 @@ void Robot_Logic::main () {
         this->subprocess_id = 0;
     }
 
+    Serial.print ("Doing process # ");
+    Serial.println (this->process_id);
+    
     // Don't freak out about the next line of code.
     // It calls a function from the array
-    // This is supposed to make the code cleaner.
-    // As you can see I don't need to do the switch
-    // And this is very modifiable (i.e. adding another function to array does not change this code)
     (this->*Tasks[process_id])();
 }
+
+// Next are functions from array of responses
 
 void Robot_Logic::Go_Towards_Beacon () {
    /* Robot_Logic::Go_Towards_Beacon

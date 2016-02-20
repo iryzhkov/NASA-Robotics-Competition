@@ -42,10 +42,10 @@ void Movement_Control::Turn_Left () {
     */
 
     this->left_Motor->set_PWM(255);
-    this->left_Motor->set_DIR(0);
-
     this->right_Motor->set_PWM(255);
-    this->left_Motor->set_DIR(0);
+    
+    this->left_Motor->set_DIR(LOW);
+    this->left_Motor->set_DIR(LOW);
 }
 
 void Movement_Control::Turn_Right () {
@@ -55,10 +55,10 @@ void Movement_Control::Turn_Right () {
     */
 
     this->left_Motor->set_PWM(255);
-    this->left_Motor->set_DIR(1);
-
     this->right_Motor->set_PWM(255);
-    this->left_Motor->set_DIR(1);
+    
+    this->left_Motor->set_DIR(LOW);
+    this->left_Motor->set_DIR(HIGH);
 }
 
 void Movement_Control::Differential_Turn (int side) {
@@ -78,11 +78,11 @@ void Movement_Control::Differential_Turn_Left () {
     *  starts turning left
     */
 
-    this->left_Motor->set_PWM(140);
-    this->left_Motor->set_DIR(1);
-
+    this->left_Motor->set_PWM(160);
     this->right_Motor->set_PWM(255);
-    this->left_Motor->set_DIR(0);
+    
+    this->left_Motor->set_DIR(HIGH);
+    this->left_Motor->set_DIR(HIGH);
 }
 
 void Movement_Control::Differential_Turn_Right () {
@@ -92,10 +92,10 @@ void Movement_Control::Differential_Turn_Right () {
     */
 
     this->left_Motor->set_PWM(255);
-    this->left_Motor->set_DIR(1);
-
-    this->right_Motor->set_PWM(140);
-    this->left_Motor->set_DIR(0);
+    this->right_Motor->set_PWM(160);
+    
+    this->left_Motor->set_DIR(HIGH);
+    this->left_Motor->set_DIR(HIGH);
 }
 
 void Movement_Control::Move_Forward () {
@@ -105,10 +105,23 @@ void Movement_Control::Move_Forward () {
     */
    
     this->left_Motor->set_PWM(255);
-    this->left_Motor->set_DIR(1);
-    
     this->right_Motor->set_PWM(255);
-    this->left_Motor->set_DIR(0);
+    
+    this->left_Motor->set_DIR(LOW);
+    this->left_Motor->set_DIR(HIGH);
+}
+
+void Movement_Control::Move_Backward () {
+   /*  Movement_Control::Move_Backwardp():
+    *   
+    *  starts moving backward of the robot by setting PWM and DIR pins
+    */
+   
+    this->left_Motor->set_PWM(255);
+    this->right_Motor->set_PWM(255);
+
+    this->left_Motor->set_DIR(HIGH);
+    this->left_Motor->set_DIR(LOW);
 }
 
 void Movement_Control::Stop () {
