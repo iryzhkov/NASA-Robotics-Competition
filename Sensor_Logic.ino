@@ -55,6 +55,26 @@ void Sensor_Logic::Update_Sensors() {
 
     this->sensor_danger_code[RIGHT_PIT] = this->Get_Danger_Code_For_Pit_Sensor (RIGHT_PIT);
     this->sensor_danger_code[LEFT_PIT] = this->Get_Danger_Code_For_Pit_Sensor (LEFT_PIT);
+
+    this->danger_id = 0;
+    this->side_id = 0;
+
+    // should create array of checkers for clarity of code
+    if (this->sensor_danger_code[RIGHT] == 1 || this->sensor_danger_code[LEFT] == 1) {
+        this->danger_id = 2;
+
+        if (this->sensor_danger_code[RIGHT] == 1)
+            this->side_id = -1;
+        else
+            this->side_id = 1;
+    }
+    
+    if (this->sensor_danger_code[RIGHT] == 1 && this->sensor_danger_code[LEFT] == 1) {
+        this->danger_id = 3;
+        this->side_id = 0;
+    }
+
+    
 }
 
 int Sensor_Logic::Get_Beacon_Direction() {

@@ -94,10 +94,11 @@ void Robot_Logic::Move_Forward () {
 }
 
 void Robot_Logic::Avoid_Possible_Obstacle_On_Side () {
-    // This will be the usual look of the functions with several subprocesses. 
-    // At subprocess 0 we initialize, and set subproces to 1
-    // At subprocess 1 we do 1 step, if we finished the step, we either change subprocess anr process id.
-    // Same for other integers.
+  /* This will be the usual look of the functions with several subprocesses. 
+   * At subprocess 0 we initialize, and set subproces to 1
+   * At subprocess 1 we do 1 step, if we finished the step, we either change subprocess anr process id.
+   * Same for other integers.
+   */
   
     switch (this->subprocess_id) {
     case 0: {

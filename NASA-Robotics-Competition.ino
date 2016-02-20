@@ -69,21 +69,21 @@ void setup() {
     
     // setting up robot logic
     robot = new Robot_Logic (drive_control, sensor_logic);
+}
 
+void loop() {
     // running unit tests if we are debbuging the program
     if (DEBUGGING) {
         // setting robot to testing mode
         robot->Set_Testing(true);
-
+     
         // running all the tests
         Test::run();
 
         // setting robot back to regular mode
         robot->Set_Testing(false);
     }
-}
-
-void loop() {
+    
     robot->main();
     delay(50);
 }
