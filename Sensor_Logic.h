@@ -18,7 +18,7 @@
 #define OBSTACLE_DANGER 600
 
 #define NUM_SENSORS 8
-#define NUM_DANGER_UPDATES 9
+#define NUM_DANGER_UPDATES 4
 
 class Sensor_Logic {
     typedef void (Sensor_Logic::*Sensor_Logic_Function)();
@@ -35,6 +35,9 @@ class Sensor_Logic {
         int Get_Danger_Code_For_Pit_Sensor (int which_sensor);
 
         void Danger_Check_For_Far_Obstacle ();
+        void Danger_Check_For_Close_Obstacle ();
+        void Danger_Check_For_Middle_Obstacle ();
+        void Danger_Check_For_Pits ();
     public:
         Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sensor *middle_sensor,
                       Sensor *left_sensor, Sensor *right_pit_sensor, Sensor *left_pit_sensor);

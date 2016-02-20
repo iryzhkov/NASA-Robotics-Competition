@@ -18,11 +18,8 @@
 #include <ArduinoUnit.h>
 
 // debugging setting
-// set to true if you want to run tests on the project
-// set to false if you are confident in the program
-// only adds 4% to program storage space. (we won't use more than 80%).
-// does not interfere with the loop()
-// please always keep true.
+// set to true if you want to run software tests on the project
+// set to false if you want to test program with real data. (need real sensors for it)
 #define DEBUGGING true
 
 // Global variables

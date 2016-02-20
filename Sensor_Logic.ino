@@ -17,29 +17,62 @@ Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sens
     this->sensor[BEACON_DIRECTION] = beacon_direction;
 
     danger_code_updates[0] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
-    danger_code_updates[1] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
-    danger_code_updates[2] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
-    danger_code_updates[3] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
-    danger_code_updates[4] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
-    danger_code_updates[5] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
-    danger_code_updates[6] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
-    danger_code_updates[7] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
-    danger_code_updates[8] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
+    danger_code_updates[1] = &Sensor_Logic::Danger_Check_For_Close_Obstacle;
+    danger_code_updates[2] = &Sensor_Logic::Danger_Check_For_Middle_Obstacle;
+    danger_code_updates[3] = &Sensor_Logic::Danger_Check_For_Pits;
 }
 
 void Sensor_Logic::Danger_Check_For_Far_Obstacle () {
     if (this->sensor_danger_code[RIGHT] == 1 || this->sensor_danger_code[LEFT] == 1) {
         this->danger_id = 2;
 
-        if (this->sensor_danger_code[RIGHT] == 1)
+        if (this->sensor_danger_code[RIGHT] == 0)
+            this->side_id = 1;
+        else if (this->sensor_danger_code[LEFT] == 0)
             this->side_id = -1;
         else
-            this->side_id = 1;
+            this->side_id = 0;
     }
-    
-    if (this->sensor_danger_code[RIGHT] == 1 && this->sensor_danger_code[LEFT] == 1) {
+}
+
+void Sensor_Logic::Danger_Check_For_Close_Obstacle () {
+    if (this->sensor_danger_code[RIGHT] == 2 || this->sensor_danger_code[LEFT] == 2) {
         this->danger_id = 3;
-        this->side_id = 0;
+
+        if (this->sensor_danger_code[RIGHT] == 0)
+            this->side_id = 1;
+        else if (this->sensor_danger_code[LEFT] == 0)
+            this->side_id = -1;
+        else
+            this->side_id = 0;
+    }
+}
+
+void Sensor_Logic::Danger_Check_For_Middle_Obstacle () {
+    if (this->sensor_danger_code[MIDDLE] == 2) {
+        this->danger_id = 6;
+
+        if (this->sensor_danger_code[RIGHT] == 0)
+            this->side_id = 1;
+
+        else if (this->sensor_danger_code[LEFT] == 0)
+            this->side_id = -1;
+
+        else
+            this->side_id = 0;
+    }
+}
+
+void Sensor_Logic::Danger_Check_For_Pits () {
+    if (this->sensor_danger_code[RIGHT_PIT] == 1 || this->sensor_danger_code[LEFT_PIT] == 1) {
+        this->danger_id = 6;
+
+        if (this->sensor_danger_code[RIGHT_PIT] == 0)
+            this->side_id = 1;
+        else if (this->sensor_danger_code[LEFT_PIT] == 0)
+            this->side_id = -1;
+        else
+            this->side_id = 0;
     }
 }
 
