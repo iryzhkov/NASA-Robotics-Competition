@@ -41,11 +41,11 @@ void Movement_Control::Turn_Left () {
     *  starts turning left
     */
 
-    this->left_Motor->set_PWM(255);
-    this->right_Motor->set_PWM(255);
+    this->left_Motor->Set_PWM(255);
+    this->right_Motor->Set_PWM(255);
     
-    this->left_Motor->set_DIR(LOW);
-    this->left_Motor->set_DIR(LOW);
+    this->left_Motor->Set_DIR(LOW);
+    this->right_Motor->Set_DIR(LOW);
 }
 
 void Movement_Control::Turn_Right () {
@@ -54,11 +54,11 @@ void Movement_Control::Turn_Right () {
     *  starts turning right
     */
 
-    this->left_Motor->set_PWM(255);
-    this->right_Motor->set_PWM(255);
+    this->left_Motor->Set_PWM(255);
+    this->right_Motor->Set_PWM(255);
     
-    this->left_Motor->set_DIR(LOW);
-    this->left_Motor->set_DIR(HIGH);
+    this->left_Motor->Set_DIR(HIGH);
+    this->right_Motor->Set_DIR(HIGH);
 }
 
 void Movement_Control::Differential_Turn (int side) {
@@ -78,11 +78,11 @@ void Movement_Control::Differential_Turn_Left () {
     *  starts turning left
     */
 
-    this->left_Motor->set_PWM(160);
-    this->right_Motor->set_PWM(255);
+    this->left_Motor->Set_PWM(160);
+    this->right_Motor->Set_PWM(255);
     
-    this->left_Motor->set_DIR(HIGH);
-    this->left_Motor->set_DIR(HIGH);
+    this->left_Motor->Set_DIR(HIGH);
+    this->right_Motor->Set_DIR(LOW);
 }
 
 void Movement_Control::Differential_Turn_Right () {
@@ -91,11 +91,11 @@ void Movement_Control::Differential_Turn_Right () {
     *  starts turning right
     */
 
-    this->left_Motor->set_PWM(255);
-    this->right_Motor->set_PWM(160);
+    this->left_Motor->Set_PWM(255);
+    this->right_Motor->Set_PWM(160);
     
-    this->left_Motor->set_DIR(HIGH);
-    this->left_Motor->set_DIR(HIGH);
+    this->left_Motor->Set_DIR(HIGH);
+    this->right_Motor->Set_DIR(LOW);
 }
 
 void Movement_Control::Move_Forward () {
@@ -103,12 +103,11 @@ void Movement_Control::Move_Forward () {
     *   
     *  starts moving forward of the robot by setting PWM and DIR pins
     */
-   
-    this->left_Motor->set_PWM(255);
-    this->right_Motor->set_PWM(255);
+    left_motor->Set_PWM(255);
+    right_motor->Set_PWM(255);
     
-    this->left_Motor->set_DIR(LOW);
-    this->left_Motor->set_DIR(HIGH);
+    right_motor->Set_DIR(LOW);
+    left_motor->Set_DIR(HIGH);  
 }
 
 void Movement_Control::Move_Backward () {
@@ -116,12 +115,12 @@ void Movement_Control::Move_Backward () {
     *   
     *  starts moving backward of the robot by setting PWM and DIR pins
     */
-   
-    this->left_Motor->set_PWM(255);
-    this->right_Motor->set_PWM(255);
 
-    this->left_Motor->set_DIR(HIGH);
-    this->left_Motor->set_DIR(LOW);
+    left_motor->Set_PWM(255);
+    right_motor->Set_PWM(255);
+    
+    left_motor->Set_DIR(LOW);
+    right_motor->Set_DIR(HIGH);
 }
 
 void Movement_Control::Stop () {
@@ -130,6 +129,6 @@ void Movement_Control::Stop () {
     *  stops the movement of the robot by setting PWM of both motors to 0.
     */
    
-    left_Motor->set_PWM(0);
-    right_Motor->set_PWM(0);
+    left_Motor->Set_PWM(0);
+    right_Motor->Set_PWM(0);
 }

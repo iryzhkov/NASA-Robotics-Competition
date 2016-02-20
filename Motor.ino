@@ -17,7 +17,7 @@ Motor::Motor (byte PWM_pin, byte DIR_pin) {
     pinMode(this->PWM_pin, OUTPUT);
 }
 
-void Motor::set_DIR (byte dir) {
+void Motor::Set_DIR (byte dir) {
     /*  setDIR (dir):
      *  
      *  0 <= dir <= 1
@@ -35,7 +35,7 @@ void Motor::set_DIR (byte dir) {
     digitalWrite (DIR_pin, DIR); 
 }
 
-byte Motor::get_DIR(){
+byte Motor::Get_DIR(){
     /*  getDIR():
      *   
      *  returns current setting of DIR pin 
@@ -44,7 +44,7 @@ byte Motor::get_DIR(){
     return DIR;
 }
 
-void Motor::set_PWM (byte pwm) {
+void Motor::Set_PWM (byte pwm) {
     /*  setDIR (dir):
      *  
      *  0 <= pwm <= 255
@@ -57,7 +57,7 @@ void Motor::set_PWM (byte pwm) {
     analogWrite(PWM_pin, PWM);
 }
 
-byte Motor::get_PWM () {
+byte Motor::Get_PWM () {
      /*  getDIR():
      *   
      *  returns current setting of PWM pin 

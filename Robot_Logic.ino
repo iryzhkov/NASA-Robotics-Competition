@@ -42,7 +42,6 @@ void Robot_Logic::Update_Sensors () {
     this->sensors->Update_Sensors();
 
     this->danger_id = this->sensors->Get_Danger_ID();
-    this->side_id = this->sensors->Get_Side_ID();
 }
 
 void Robot_Logic::main () {
@@ -106,6 +105,7 @@ void Robot_Logic::Avoid_Possible_Obstacle_On_Side () {
     case 0: {
         this->process_time = 20;
         this->subprocess_id = 1;
+        this->side_id = this->sensors->Get_Side_ID();
     };
     case 1: {     
         // take 50 miliseconds away from requierd time

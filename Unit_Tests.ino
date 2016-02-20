@@ -117,3 +117,37 @@ test (danger_middle) {
 
 test (side_middle) {
 }
+
+void testMotor (Motor *test_motor) {
+    test_motor->Set_DIR(HIGH);
+    test_motor->Set_PWM(255);
+
+    delay (500);
+
+    test_motor->Set_DIR(LOW);
+
+    delay (500);
+    test_motor->Set_PWM(0);
+}
+
+void testTwoMotors (Movement_Control *control) {
+    control->Move_Forward();
+
+    delay(750);
+
+    control->Move_Backward();
+
+    delay(750);
+
+    control->Turn_Right();
+
+    delay(750);
+
+    control->Turn_Left();
+
+    delay(750);
+
+    left_motor->Set_PWM(0);
+    right_motor->Set_PWM(0);
+}
+

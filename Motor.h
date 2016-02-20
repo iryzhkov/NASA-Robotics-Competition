@@ -15,10 +15,10 @@ class Motor {
         Motor(byte PWM_pin, byte DIR_pin);
 
         // setter methods
-        void set_DIR (byte);
-        void set_PWM (byte);
+        void Set_DIR (byte);
+        void Set_PWM (byte);
 
         // getter methods
-        byte get_DIR ();
-        byte get_PWM ();  
+        byte Get_DIR ();
+        byte Get_PWM ();  
 };

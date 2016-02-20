@@ -17,10 +17,12 @@
 // library link: https://github.com/mmurdoch/arduinounit
 #include <ArduinoUnit.h>
 
-// debugging setting
-// set to true if you want to run software tests on the project
-// set to false if you want to run hardware tests on the project
-#define DEBUGGING true
+// Testing settings
+// Set testing true if you want to test software or hardware
+// Set Software true if you want to test software
+// Set Software false if you want to test hardware
+#define TESTING true
+#define SOFTWARE false
 
 // Global variables
 Robot_Logic       *robot;
@@ -69,18 +71,33 @@ void setup() {
 
 void loop() {
     // running unit tests if we are debbuging the program
-    if (DEBUGGING) {
-        // setting robot to testing mode
-        robot->Set_Testing(true);
-     
-        // running all the tests
-        Test::run();
+    if (TESTING) {
+        if (SOFTWARE) {
+            // setting robot to testing mode
+            robot->Set_Testing(true);
+         
+            // running all the tests
+            Test::run();
+    
+            // setting robot back to regular mode
+            robot->Set_Testing(false);
+        }
+        else {
+            // hardware testing here
 
-        // setting robot back to regular mode
-        robot->Set_Testing(false);
+            // testing right motor
+            testMotor(right_motor);
+
+            // testing left motor
+            testMotor(left_motor);
+
+            // testing control system
+            // it should drive forward, backward, turn right, turn left
+            testTwoMotors(drive_control);
+        }
     }
     else {
         robot->main();
-        delay(200);
+        delay(50);
     }
 }
