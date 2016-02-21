@@ -13,10 +13,7 @@ Robot_Logic::Robot_Logic (Movement_Control *control, Sensor_Logic *sensors) {
     this->Tasks[0] = &Robot_Logic::Go_Towards_Beacon;
     this->Tasks[1] = &Robot_Logic::Move_Forward;
     this->Tasks[2] = &Robot_Logic::Avoid_Possible_Obstacle_On_Side;
-    this->Tasks[3] = &Robot_Logic::Avoid_Definite_Obstacle_On_Side;
-    this->Tasks[4] = &Robot_Logic::Avoid_Obstacle_In_Front;
-    this->Tasks[5] = &Robot_Logic::Avoid_Pit_On_Side;
-    this->Tasks[6] = &Robot_Logic::Avoid_Pit_In_Front;
+    this->Tasks[3] = &Robot_Logic::Avoid_Obstacle_In_Front;
 }
 
 void Robot_Logic::Set_Testing (bool value) {
@@ -40,20 +37,16 @@ int Robot_Logic::Get_Subprocess_ID () {
 
 void Robot_Logic::Update_Sensors () {
     this->sensors->Update_Sensors();
-
-    this->danger_id = this->sensors->Get_Danger_ID();
 }
 
 void Robot_Logic::main () {
     this->sensors->Update_Sensors();
+    this->danger_id = this->sensors->Get_Danger_ID();
   
     if (this->danger_id > this->process_id) {
         this->process_id = this->danger_id;
         this->subprocess_id = 0;
     }
-
-    Serial.print ("Doing process # ");
-    Serial.println (this->process_id);
     
     // Don't freak out about the next line of code.
     // It calls a function from the array
@@ -103,7 +96,7 @@ void Robot_Logic::Avoid_Possible_Obstacle_On_Side () {
   
     switch (this->subprocess_id) {
     case 0: {
-        this->process_time = 20;
+        this->process_time = 5;
         this->subprocess_id = 1;
         this->side_id = this->sensors->Get_Side_ID();
     };
@@ -125,18 +118,46 @@ void Robot_Logic::Avoid_Possible_Obstacle_On_Side () {
     }
 }
 
-void Robot_Logic::Avoid_Definite_Obstacle_On_Side () {
-    this->process_id = 1;
-}
-
 void Robot_Logic::Avoid_Obstacle_In_Front () {
-    this->process_id = 1;
-}
+    /* This will be the usual look of the functions with several subprocesses. 
+   * At subprocess 0 we initialize, and set subproces to 1
+   * At subprocess 1 we do 1 step, if we finished the step, we either change subprocess anr process id.
+   * Same for other integers.
+   */
+  
+    switch (this->subprocess_id) {
+    case 0: {
+        this->subprocess_id = 1;
+        this->side_id = this->sensors->Get_Side_ID();
 
-void Robot_Logic::Avoid_Pit_On_Side () {
-    this->process_id = 1;
-}
+        if (this->side_id == 0) {
+            this->side_id = random(500);
 
-void Robot_Logic::Avoid_Pit_In_Front () {
-     this->process_id = 1;
+            if (this->side_id % 2 == 0)
+                this->side_id = -1;
+            else
+                this->side_id = 1;
+        }
+    };
+    case 1: {     
+        // take 50 miliseconds away from requierd time
+        // and set controls to do the turn towards the side without obstacles
+        this->process_time -= 1;
+        this->control->Move_Backward();
+
+        // nothing could happen when driving backwards
+        this->Update_Sensors();
+        delay(200);
+
+
+        // nothing could happen when turing in place
+        this->control->Turn(this->side_id);
+        this->Update_Sensors();
+        delay(200);
+
+        this->Update_Sensors();
+        this->process_time = 10;
+        this->process_id = 1;
+    };
+    }
 }

@@ -21,8 +21,8 @@
 // Set testing true if you want to test software or hardware
 // Set Software true if you want to test software
 // Set Software false if you want to test hardware
-#define TESTING true
-#define SOFTWARE false
+#define TESTING false
+#define SOFTWARE true
 
 // Global variables
 Robot_Logic       *robot;

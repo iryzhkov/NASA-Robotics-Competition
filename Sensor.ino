@@ -20,6 +20,7 @@ Sensor::Sensor (byte pin) {
   */
     testing = false;
     this->sensor_pin = pin;
+    this->sensor_value = 0;
     pinMode (pin, INPUT);
 }
 
@@ -30,7 +31,8 @@ void Sensor::Update_Value() {
   */
 
     if (!this->testing)
-        this->sensor_value = analogRead(this->sensor_pin); 
+        this->previous_value = this->sensor_value;
+        this->sensor_value = (analogRead(this->sensor_pin) + this->previous_value) / 2; 
 }
 
 void Sensor::Set_Value(int value) {

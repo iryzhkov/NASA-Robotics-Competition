@@ -4,7 +4,7 @@
  *  This is Robot_Logic header. Does all the logic for the robot control.
  */
 
-#define NUM_FUNCTIONS
+#define NUM_FUNCTIONS 4
 
 class Robot_Logic {
     typedef void (Robot_Logic::*Control_Function)();
@@ -28,12 +28,7 @@ class Robot_Logic {
         void Move_Forward ();
 
         void Avoid_Possible_Obstacle_On_Side ();
-        void Avoid_Definite_Obstacle_On_Side ();
-
         void Avoid_Obstacle_In_Front ();
-
-        void Avoid_Pit_On_Side ();
-        void Avoid_Pit_In_Front ();
 
         void Set_Process_ID (int value);
         int Get_Process_ID ();

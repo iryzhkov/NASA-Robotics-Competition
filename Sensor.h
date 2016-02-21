@@ -6,7 +6,7 @@
 
 class Sensor {
     protected:
-        int sensor_value;
+        int sensor_value, previous_value;
         byte sensor_pin;
         bool testing;
     public:

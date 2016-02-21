@@ -52,7 +52,7 @@ void Sensor_Logic::Danger_Check_For_Close_Obstacle () {
 
 void Sensor_Logic::Danger_Check_For_Middle_Obstacle () {
     if (this->sensor_danger_code[MIDDLE] == 2) {
-        this->danger_id = 6;
+        this->danger_id = 3;
 
         if (this->sensor_danger_code[RIGHT] == 0)
             this->side_id = 1;
@@ -66,8 +66,9 @@ void Sensor_Logic::Danger_Check_For_Middle_Obstacle () {
 }
 
 void Sensor_Logic::Danger_Check_For_Pits () {
+    /*
     if (this->sensor_danger_code[RIGHT_PIT] == 1 || this->sensor_danger_code[LEFT_PIT] == 1) {
-        this->danger_id = 6;
+        this->danger_id = 7;
 
         if (this->sensor_danger_code[RIGHT_PIT] == 0)
             this->side_id = 1;
@@ -76,6 +77,7 @@ void Sensor_Logic::Danger_Check_For_Pits () {
         else
             this->side_id = 0;
     }
+    */
 }
 
 void Sensor_Logic::Set_Testing (bool value) {

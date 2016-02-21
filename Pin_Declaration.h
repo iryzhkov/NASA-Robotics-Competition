@@ -20,8 +20,8 @@
 // used up all analog input pins. be carefull.
 #define LEFT_PIT_SENSOR_PIN A0
 #define RIGHT_PIT_SENSOR_PIN A1
-#define LEFT_SENSOR_PIN A2
-#define RIGHT_SENSOR_PIN A3
-#define MIDDLE_SENSOR_PIN A4
+#define LEFT_SENSOR_PIN A1
+#define RIGHT_SENSOR_PIN A0
+#define MIDDLE_SENSOR_PIN A2
 
 #define DIRECTION_SENSOR_PIN A5
