@@ -30,9 +30,12 @@ void Sensor::Update_Value() {
   * read the value from the pin.
   */
 
-    if (!this->testing)
-        this->previous_value = this->sensor_value;
-        this->sensor_value = (analogRead(this->sensor_pin) + this->previous_value) / 2; 
+    if (!this->testing) {
+        this->sensor_value = 0;
+        for (int i = 0; i < 10; i++)
+            this->sensor_value += analogRead(this->sensor_pin);
+        this->sensor_value /= 10;
+    }
 }
 
 void Sensor::Set_Value(int value) {

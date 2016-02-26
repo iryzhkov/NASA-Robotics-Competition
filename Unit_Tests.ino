@@ -112,12 +112,6 @@ test (side_pit){
     assertEqual(-1, sensor_logic->Get_Side_ID());
 }
 
-test (danger_middle) {
-}
-
-test (side_middle) {
-}
-
 void testMotor (Motor *test_motor) {
     test_motor->Set_DIR(HIGH);
     test_motor->Set_PWM(255);
@@ -150,4 +144,3 @@ void testTwoMotors (Movement_Control *control) {
     left_motor->Set_PWM(0);
     right_motor->Set_PWM(0);
 }
-
