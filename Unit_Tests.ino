@@ -13,6 +13,7 @@
  *  library link: https://github.com/mmurdoch/arduinounit
  */
 
+/*
 void Set_To_Zero_State () {
     left_pit_sensor->Set_Value(PIT_DANGER+5);
     right_pit_sensor->Set_Value(PIT_DANGER+5);
@@ -110,7 +111,8 @@ test (side_pit){
     sensor_logic->Update_Sensors();
 
     assertEqual(-1, sensor_logic->Get_Side_ID());
-}
+} 
+*/
 
 void testMotor (Motor *test_motor) {
     test_motor->Set_DIR(HIGH);
