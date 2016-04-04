@@ -1,3 +1,9 @@
+#include <Wire.h>
+#include <HMC5883L.h>
+
+HMC5883L compass;
+int compass_error = 0;
+
 void Set_Up_Compass () {
   Wire.begin(); // Start the I2C interface.
   
