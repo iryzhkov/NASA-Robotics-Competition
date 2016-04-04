@@ -116,7 +116,7 @@ test (side_pit){
 
 void testMotor (Motor *test_motor) {
     test_motor->Set_DIR(HIGH);
-    test_motor->Set_PWM(255);
+    test_motor->Set_PWM(2);
 
     delay (500);
 

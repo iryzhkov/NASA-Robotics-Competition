@@ -21,8 +21,8 @@
 // Set testing true if you want to test software or hardware
 // Set Software true if you want to test software
 // Set Software false if you want to test hardware
-#define TESTING false
-#define SOFTWARE true
+#define TESTING true
+#define SOFTWARE false
 
 // Global variables
 Robot_Logic       *robot;
@@ -86,14 +86,14 @@ void loop() {
             // hardware testing here
 
             // testing right motor
-            testMotor(right_motor);
+            drive_control->Differential_Turn(1);
+            delay (1000);
 
-            // testing left motor
-            testMotor(left_motor);
-
-            // testing control system
-            // it should drive forward, backward, turn right, turn left
-            testTwoMotors(drive_control);
+            drive_control->Differential_Turn(-1);
+            delay (1000);
+            
+            drive_control->Move_Backward();
+            delay (1500);
         }
     }
     else {

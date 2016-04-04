@@ -7,10 +7,10 @@
  */ 
 
 // declaration of motor pins
-#define RIGHT_MOTOR_DIR_PIN 13
-#define RIGHT_MOTOR_PWM_PIN 11
+#define RIGHT_MOTOR_DIR_PIN 8
+#define RIGHT_MOTOR_PWM_PIN 9
 #define LEFT_MOTOR_DIR_PIN 12
-#define LEFT_MOTOR_PWM_PIN 3
+#define LEFT_MOTOR_PWM_PIN 11
 
  
 // declaration of sensor pins
