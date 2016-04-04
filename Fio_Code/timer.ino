@@ -23,18 +23,22 @@ ISR(TIMER1_COMPA_vect){//timer1 interrupt 1Hz updates the pin value depending on
   
   if (compass_heading > beacon_heading){
     if (compass_heading - beacon_heading <= 180) {
-      // turn left
+      // Beacon is to the left
+      digitalWrite(OUTPUT_PIN, LOW);
     }
     else {
-      // turn right
+      // Beacon is to the right
+      digitalWrite(OUTPUT_PIN, HIGH);
     }
   }
   else {
     if (beacon_heading - compass_heading <= 180) {
-      // turn right
+      // Beacon is to the right
+      digitalWrite(OUTPUT_PIN, HIGH);
     }
     else {
-      // turn left
+      // Beacon is to the left
+      digitalWrite(OUTPUT_PIN, LOW);
     }
   }
 }

@@ -3,7 +3,7 @@
 
 #define DECLINATION_ANGLE 0.0457 // use ... for the competition
 
-#define OUTPUT_PIN 12;
+#define OUTPUT_PIN 12
 
 float volatile beacon_heading;
 
