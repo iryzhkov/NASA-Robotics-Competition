@@ -17,13 +17,8 @@ void Set_Up_Compass () {
 }
 
 float Get_Compass_Heading () {
-  // Retrive the raw values from the compass (not scaled).
-  MagnetometerRaw raw = compass.ReadRawAxis();
   // Retrived the scaled values from the compass (scaled to the configured scale).
   MagnetometerScaled scaled = compass.ReadScaledAxis();
-  
-  // Values are accessed like so:
-  int MilliGauss_OnThe_XAxis = scaled.XAxis;// (or YAxis, or ZAxis)
 
   // Calculate heading when the magnetometer is level, then correct for signs of axis.
   float heading = atan2(scaled.YAxis, scaled.XAxis);

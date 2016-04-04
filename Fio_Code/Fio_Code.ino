@@ -11,9 +11,10 @@ float volatile beacon_heading;
 void setup()
 {
   // Initialize the serial port.
-  Serial.begin(9600);
+  Serial.begin (9600);
   Set_Up_Compass ();
   Set_Up_Timer ();
+  Set_Up_Beacon ();
 }
 
 // Our main program loop.
