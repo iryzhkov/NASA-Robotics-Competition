@@ -2,7 +2,7 @@
 #define DEFAULT_BEACON_HEADING 180.0 // Assume that beacon is there, if x-bee doesn't work or is not on.
 
 #define DECLINATION_ANGLE 0.0457 // use ... for the competition
-
+ 
 #define OUTPUT_PIN 13
 
 volatile float beacon_heading;
