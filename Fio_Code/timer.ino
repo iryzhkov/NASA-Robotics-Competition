@@ -21,26 +21,31 @@ ISR(TIMER1_COMPA_vect){//timer1 interrupt 1Hz updates the pin value depending on
   float compass_heading = Get_Compass_Heading();
   cli();
 
-  Serial.println (compass_heading);
+  //Serial.print (compass_heading);
+  //Serial.print (" ");
   
   if (compass_heading > beacon_heading){
     if (compass_heading - beacon_heading <= 180) {
       // Beacon is to the left
       digitalWrite(OUTPUT_PIN, LOW);
+      //Serial.println ("-1");
     }
     else {
       // Beacon is to the right
       digitalWrite(OUTPUT_PIN, HIGH);
+      //Serial.println ("1");
     }
   }
   else {
     if (beacon_heading - compass_heading <= 180) {
       // Beacon is to the right
       digitalWrite(OUTPUT_PIN, HIGH);
+      //Serial.println ("1");
     }
     else {
       // Beacon is to the left
       digitalWrite(OUTPUT_PIN, LOW);
+      //Serial.println ("-1");
     }
   }
 }

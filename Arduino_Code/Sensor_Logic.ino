@@ -131,7 +131,7 @@ int Sensor_Logic::Get_Beacon_Direction() {
     // Returns -1 if we are too left
     // return 1 if we are too right
     
-    if (this->sensor[BEACON_DIRECTION]->Get_Value() > 300) {
+    if (this->sensor[BEACON_DIRECTION]->Get_Value() > 980) {
       return 1;
     }
     else {

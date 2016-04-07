@@ -97,7 +97,11 @@ void loop() {
         }
     }
     else {
-        robot->main();
-        delay(50);
+        //robot->main();
+        //delay(50);
+
+        sensor_logic->Update_Sensors();
+        Serial.println (sensor_logic->Get_Beacon_Direction());
+        delay (500);
     }
 }
