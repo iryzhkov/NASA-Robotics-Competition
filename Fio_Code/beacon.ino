@@ -31,8 +31,8 @@ union{
 
 void Set_Up_Beacon () {
   //Initialize serial communications at 57600 bps:
-  Serial.begin(57600); 
-  xbee.setSerial(Serial);
+  //Serial1.begin(57600); 
+  //xbee.setSerial(Serial1);
 
   //Initialize i2c communications
   Wire.begin(8);                // join i2c bus with address #8

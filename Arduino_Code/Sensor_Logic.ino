@@ -122,8 +122,8 @@ void Sensor_Logic::Update_Sensors() {
     this->danger_id = 0;
     this->side_id = 0;
 
-    for (int i = 0; i < NUM_DANGER_UPDATES; i++)
-      (this->*this->danger_code_updates[i])();    
+    //for (int i = 0; i < NUM_DANGER_UPDATES; i++)
+    //  (this->*this->danger_code_updates[i])();    
 }
 
 int Sensor_Logic::Get_Beacon_Direction() {
@@ -131,7 +131,7 @@ int Sensor_Logic::Get_Beacon_Direction() {
     // Returns -1 if we are too left
     // return 1 if we are too right
     
-    if (this->sensor[BEACON_DIRECTION]->Get_Value() > 500) {
+    if (this->sensor[BEACON_DIRECTION]->Get_Value() > 300) {
       return 1;
     }
     else {

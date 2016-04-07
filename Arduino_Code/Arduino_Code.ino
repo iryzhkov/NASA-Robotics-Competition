@@ -21,7 +21,7 @@
 // Set testing true if you want to test software or hardware
 // Set Software true if you want to test software
 // Set Software false if you want to test hardware
-#define TESTING true
+#define TESTING false
 #define SOFTWARE false
 
 // Global variables

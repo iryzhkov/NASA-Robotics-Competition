@@ -20,6 +20,8 @@ ISR(TIMER1_COMPA_vect){//timer1 interrupt 1Hz updates the pin value depending on
   sei();
   float compass_heading = Get_Compass_Heading();
   cli();
+
+  Serial.println (compass_heading);
   
   if (compass_heading > beacon_heading){
     if (compass_heading - beacon_heading <= 180) {
