@@ -12,6 +12,8 @@ Movement_Control::Movement_Control (Motor *left, Motor *right) {
 
     this->left_Motor = left;
     this->right_Motor = right;
+
+    this->current_direction = 0;
 }
 
 Movement_Control::Movement_Control (int left_PWM_pin, int left_DIR_pin, int right_PWM_pin, int right_DIR_pin) {
@@ -78,6 +80,12 @@ void Movement_Control::Differential_Turn_Left () {
     *  starts turning left
     */
 
+    if (this->current_direction == -1) {
+      this->Stop();
+    }
+
+    this->current_direction = 1;
+
     this->left_Motor->Set_PWM(100);
     this->right_Motor->Set_PWM(150);
     
@@ -91,6 +99,12 @@ void Movement_Control::Differential_Turn_Right () {
     *  starts turning right
     */
 
+    if (this->current_direction == -1) {
+      this->Stop();
+    }
+
+    this->current_direction = 1;
+
     this->left_Motor->Set_PWM(150);
     this->right_Motor->Set_PWM(100);
     
@@ -103,6 +117,13 @@ void Movement_Control::Move_Forward () {
     *   
     *  starts moving forward of the robot by setting PWM and DIR pins
     */
+
+    if (this->current_direction == -1) {
+      this->Stop();
+    }
+
+    this->current_direction = 1;
+    
     left_motor->Set_PWM(140);
     right_motor->Set_PWM(140);
     
@@ -116,6 +137,12 @@ void Movement_Control::Move_Backward () {
     *  starts moving backward of the robot by setting PWM and DIR pins
     */
 
+    if (this->current_direction == 1) {
+      this->Stop();
+    }
+
+    this->current_direction = -1;
+
     left_motor->Set_PWM(140);
     right_motor->Set_PWM(140);
     
@@ -128,7 +155,25 @@ void Movement_Control::Stop () {
     *   
     *  stops the movement of the robot by setting PWM of both motors to 0.
     */
-   
+    if (this->current_direction != 0) {
+        if (this->current_direction == 1) {
+            left_motor->Set_DIR(LOW);
+            right_motor->Set_DIR(HIGH);
+        }
+        else if (this->current_direction == -1) {
+            right_motor->Set_DIR(LOW);
+            left_motor->Set_DIR(HIGH);
+        }
+
+        left_motor->Set_PWM(50);
+        right_motor->Set_PWM(50);
+
+        delay(60);
+        this->current_direction = 0;
+    }
+  
     left_Motor->Set_PWM(0);
     right_Motor->Set_PWM(0);
+
+    delay(50);
 }

@@ -21,7 +21,7 @@
 // Set testing true if you want to test software or hardware
 // Set Software true if you want to test software
 // Set Software false if you want to test hardware
-#define TESTING false
+#define TESTING true
 #define SOFTWARE false
 
 // Global variables
@@ -86,6 +86,16 @@ void loop() {
         else {
             // hardware testing here
 
+            delay(100);
+            sensor_logic->Update_Sensors();
+
+            Serial.print ("Left Sensor: ");
+            Serial.print (left_sensor->Get_Value());
+
+            Serial.print ("\tRight Sensor: ");
+            Serial.println (right_sensor->Get_Value());
+            
+            /*
             // testing right motor
             drive_control->Differential_Turn(1);
             delay (1000);
@@ -95,6 +105,7 @@ void loop() {
             
             drive_control->Move_Backward();
             delay (1500);
+            */
         }
     }
     else {
