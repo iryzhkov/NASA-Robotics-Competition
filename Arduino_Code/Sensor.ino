@@ -29,12 +29,11 @@ void Sensor::Update_Value() {
   *  
   * read the value from the pin.
   */
-
     if (!this->testing) {
         this->sensor_value = 0;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 20; i++)
             this->sensor_value += analogRead(this->sensor_pin);
-        this->sensor_value /= 10;
+        this->sensor_value /= 20;
     }
 }
 

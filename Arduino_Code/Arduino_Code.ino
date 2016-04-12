@@ -53,17 +53,18 @@ void setup() {
     drive_control = new Movement_Control(left_motor, right_motor);
 
     // setting up IR sensors with the testing settings
-    left_pit_sensor = new Sensor(LEFT_PIT_SENSOR_PIN);   
-    right_pit_sensor = new Sensor(RIGHT_PIT_SENSOR_PIN); 
+    //left_pit_sensor = new Sensor(LEFT_PIT_SENSOR_PIN);   
+    //right_pit_sensor = new Sensor(RIGHT_PIT_SENSOR_PIN); 
     left_sensor = new Sensor(LEFT_SENSOR_PIN);
     right_sensor = new Sensor(RIGHT_SENSOR_PIN);
-    middle_sensor = new Sensor(MIDDLE_SENSOR_PIN);
+    //middle_sensor = new Sensor(MIDDLE_SENSOR_PIN);
 
     // setting up compass and beacon sensors
     beacon_direction = new Sensor(DIRECTION_SENSOR_PIN);
 
     // setting up sensor logic
-    sensor_logic = new Sensor_Logic (beacon_direction, right_sensor, middle_sensor, left_sensor, right_pit_sensor, left_pit_sensor);
+    //sensor_logic = new Sensor_Logic (beacon_direction, right_sensor, middle_sensor, left_sensor, right_pit_sensor, left_pit_sensor);
+    sensor_logic = new Sensor_Logic (beacon_direction, right_sensor, left_sensor);
     
     // setting up robot logic
     robot = new Robot_Logic (drive_control, sensor_logic);
@@ -97,11 +98,10 @@ void loop() {
         }
     }
     else {
-        //robot->main();
-        //delay(50);
+        robot->main();
+        delay(50);
 
-        sensor_logic->Update_Sensors();
-        Serial.println (sensor_logic->Get_Beacon_Direction());
-        delay (500);
+        //Serial.println (analogRead(A0));
+        //delay (500);
     }
 }

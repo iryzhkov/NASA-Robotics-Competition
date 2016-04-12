@@ -9,6 +9,8 @@ Robot_Logic::Robot_Logic (Movement_Control *control, Sensor_Logic *sensors) {
     this->sensors = sensors;
     
     this->process_id = 0;
+    this->subprocess_id = 0;
+    this->process_time = 0;
 
     this->Tasks[0] = &Robot_Logic::Go_Towards_Beacon;
     this->Tasks[1] = &Robot_Logic::Move_Forward;
@@ -47,6 +49,14 @@ void Robot_Logic::main () {
         this->process_id = this->danger_id;
         this->subprocess_id = 0;
     }
+
+    Serial.print (this->danger_id);
+    Serial.print (" ");
+    Serial.print (this->process_id);
+    Serial.print (" ");
+    Serial.print (this->subprocess_id);
+    Serial.print (" ");
+    Serial.println (this->process_time);
     
     // Don't freak out about the next line of code.
     // It calls a function from the array
@@ -79,11 +89,12 @@ void Robot_Logic::Move_Forward () {
    * before calling it, please set the process_time to the nedded value.
    */
     
-    if (process_time <= 0)
+    if (this->process_time <= 0) {
         this->process_id = 0;
         return;
+    }
 
-    process_time -= 1;
+    this->process_time -= 1;
     this->control->Move_Forward();
 }
 
@@ -110,7 +121,7 @@ void Robot_Logic::Avoid_Possible_Obstacle_On_Side () {
         if (this->process_time <= 0) {
           
             // Start going forward for some time
-            this->process_time = 10;
+            this->process_time = 5;
             this->process_id = 1;
             break;
         }
@@ -140,22 +151,14 @@ void Robot_Logic::Avoid_Obstacle_In_Front () {
         }
     };
     case 1: {     
-        // take 50 miliseconds away from requierd time
         // and set controls to do the turn towards the side without obstacles
-        this->process_time -= 1;
         this->control->Move_Backward();
-
-        // nothing could happen when driving backwards
-        this->Update_Sensors();
-        delay(200);
-
+        delay(700);
 
         // nothing could happen when turing in place
         this->control->Turn(this->side_id);
-        this->Update_Sensors();
-        delay(200);
+        delay(700);
 
-        this->Update_Sensors();
         this->process_time = 10;
         this->process_id = 1;
     };

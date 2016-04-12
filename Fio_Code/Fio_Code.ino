@@ -1,5 +1,5 @@
 #define BEACON_WOKRING false
-#define DEFAULT_BEACON_HEADING 270.0 // Assume that beacon is there, if x-bee doesn't work or is not on.
+#define DEFAULT_BEACON_HEADING 30.0 // Assume that beacon is there, if x-bee doesn't work or is not on.
 
 #define DECLINATION_ANGLE 0.0457 // use ... for the competition
  
