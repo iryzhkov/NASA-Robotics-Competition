@@ -9,7 +9,7 @@ void Set_Up_Timer () {
   // turn on CTC mode
   TCCR1B |= (1 << WGM12);
   // Set CS10 and CS12 bits for 1024 prescaler
-  TCCR1B |= (1 << CS12) | (0 << CS11);  
+  TCCR1B |= (1 << CS12) | (0 << CS11) | (0 << CS10);  
   // enable timer compare interrupt
   TIMSK1 |= (1 << OCIE1A);
 
@@ -22,8 +22,9 @@ ISR(TIMER1_COMPA_vect){//timer1 interrupt 1Hz updates the pin value depending on
   cli();
 
   if (SERIAL_PRINT) {
+    Serial.print ("Current compass heading: ");
     Serial.print (compass_heading);
-    Serial.print (" ");
+    Serial.print ("\tOutput Pin: ");
   }
   
   if (compass_heading > beacon_heading){
