@@ -86,8 +86,8 @@ void Movement_Control::Differential_Turn_Left () {
 
     this->current_direction = 1;
 
-    this->left_Motor->Set_PWM(100);
-    this->right_Motor->Set_PWM(150);
+    this->left_Motor->Set_PWM(125);
+    this->right_Motor->Set_PWM(175);
     
     this->left_Motor->Set_DIR(HIGH);
     this->right_Motor->Set_DIR(LOW);
@@ -105,8 +105,8 @@ void Movement_Control::Differential_Turn_Right () {
 
     this->current_direction = 1;
 
-    this->left_Motor->Set_PWM(150);
-    this->right_Motor->Set_PWM(100);
+    this->left_Motor->Set_PWM(175);
+    this->right_Motor->Set_PWM(125);
     
     this->left_Motor->Set_DIR(HIGH);
     this->right_Motor->Set_DIR(LOW);
