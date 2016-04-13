@@ -1,5 +1,9 @@
 #define BEACON_WOKRING false
-#define DEFAULT_BEACON_HEADING 30.0 // Assume that beacon is there, if x-bee doesn't work or is not on.
+#define DIRECTED_FORWARD_COMPASS false
+
+#define SERIAL_PRINT true
+
+#define DEFAULT_BEACON_HEADING 240.0 // Assume that beacon is there, if x-bee doesn't work or is not on.
 
 #define DECLINATION_ANGLE 0.0457 // use ... for the competition
  
@@ -11,9 +15,36 @@ volatile float beacon_heading;
 void setup()
 {
   // Initialize the serial port.
-  Serial.begin (9600);
+
+  if (SERIAL_PRINT) {
+      Serial.begin (9600);
+  }
+  
   Set_Up_Compass ();
-  //Set_Up_Beacon ();
+
+  if (BEACON_WOKRING) {
+      Set_Up_Beacon ();
+  }
+
+  beacon_heading = DEFAULT_BEACON_HEADING;
+
+  if (!BEACON_WOKRING && !DIRECTED_FORWARD_COMPASS) {
+    int averaging_number = 10;
+    beacon_heading = 0;
+      
+    for (int i = 0; i < 0; i++) {
+      beacon_heading += Get_Compass_Heading();
+      delay(50);
+    }
+
+    beacon_heading /= averaging_number;
+
+    if (SERIAL_PRINT) {
+      Serial.print ("I setup my heading to be: ");
+      Serial.println(beacon_heading);
+    }
+  }
+  
   Set_Up_Timer ();
 }
 
@@ -21,13 +52,10 @@ void setup()
 void loop()
 {
   if (BEACON_WOKRING) { 
-    //Update_Beacon_Direction ();
-    //Serial.println (beacon_heading);
-  }
-  else {
-    cli();
-    beacon_heading = DEFAULT_BEACON_HEADING;
-    sei();
+    Update_Beacon_Direction ();
+
+    if (SERIAL_PRINT)
+      Serial.println (beacon_heading);
   }
   delay (500);
 }
