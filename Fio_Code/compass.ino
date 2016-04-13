@@ -6,22 +6,28 @@ int error = 0;
 
 void Set_Up_Compass () {
   Wire.begin(); // Start the I2C interface.
-  
-  Serial.println("Starting the I2C interface.");
+
+  if (SERIAL_PRINT)
+    Serial.println("Starting the I2C interface.");
   Wire.begin(); // Start the I2C interface.
 
-  Serial.println("Constructing new HMC5883L");
+  if (SERIAL_PRINT)
+    Serial.println("Constructing new HMC5883L");
   compass = HMC5883L(); // Construct a new HMC5883 compass.
-    
-  Serial.println("Setting scale to +/- 1.3 Ga");
+
+  if (SERIAL_PRINT)
+    Serial.println("Setting scale to +/- 1.3 Ga");
   error = compass.SetScale(1.3); // Set the scale of the compass.
   if(error != 0) // If there is an error, print it out.
-    Serial.println(compass.GetErrorText(error));
-  
-  Serial.println("Setting measurement mode to continous.");
+    if (SERIAL_PRINT)
+      Serial.println(compass.GetErrorText(error));
+
+  if (SERIAL_PRINT)
+    Serial.println("Setting measurement mode to continous.");
   error = compass.SetMeasurementMode(Measurement_Continuous); // Set the measurement mode to Continuous
   if(error != 0) // If there is an error, print it out.
-    Serial.println(compass.GetErrorText(error));
+    if (SERIAL_PRINT)
+      Serial.println(compass.GetErrorText(error));
 }
 
 float Get_Compass_Heading () {
