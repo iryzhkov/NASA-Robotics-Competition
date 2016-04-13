@@ -153,11 +153,11 @@ void Robot_Logic::Avoid_Obstacle_In_Front () {
     case 1: {     
         // and set controls to do the turn towards the side without obstacles
         this->control->Move_Backward();
-        delay(700);
+        delay(500);
 
         // nothing could happen when turing in place
         this->control->Turn(this->side_id);
-        delay(700);
+        delay(400);
 
         this->process_time = 10;
         this->process_id = 1;
