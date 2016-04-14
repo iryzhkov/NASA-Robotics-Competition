@@ -1,5 +1,5 @@
 #define BEACON_WOKRING false
-#define DIRECTED_FORWARD_COMPASS false
+#define USE_DEFAULT_COMPASS_DIRECTION false
 
 #define SERIAL_PRINT true
 
@@ -28,7 +28,7 @@ void setup()
 
   beacon_heading = DEFAULT_BEACON_HEADING;
 
-  if (!BEACON_WOKRING && !DIRECTED_FORWARD_COMPASS) {
+  if (!BEACON_WOKRING && !USE_DEFAULT_COMPASS_DIRECTION) {
     int averaging_number = 10;
     beacon_heading = 0;
       
@@ -54,8 +54,10 @@ void loop()
   if (BEACON_WOKRING) { 
     Update_Beacon_Direction ();
 
-    if (SERIAL_PRINT)
+    if (SERIAL_PRINT) {
+      Serial.print ("Updated beacon heading: ");
       Serial.println (beacon_heading);
+    }
   }
-  delay (500);
+  delay(100);
 }
