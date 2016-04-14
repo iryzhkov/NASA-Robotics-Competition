@@ -32,7 +32,7 @@ void setup()
     int averaging_number = 10;
     beacon_heading = 0;
       
-    for (int i = 0; i < 0; i++) {
+    for (int i = 0; i < averaging_number; i++) {
       beacon_heading += Get_Compass_Heading();
       delay(50);
     }
