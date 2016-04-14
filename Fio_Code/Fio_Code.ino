@@ -1,5 +1,5 @@
 #define BEACON_WOKRING false
-#define USE_DEFAULT_COMPASS_DIRECTION false
+#define USE_DEFAULT_BEACON_HEADING false
 
 #define SERIAL_PRINT true
 
@@ -28,7 +28,7 @@ void setup()
 
   beacon_heading = DEFAULT_BEACON_HEADING;
 
-  if (!BEACON_WOKRING && !USE_DEFAULT_COMPASS_DIRECTION) {
+  if (!BEACON_WOKRING && !USE_DEFAULT_BEACON_HEADING) {
     int averaging_number = 10;
     beacon_heading = 0;
       
