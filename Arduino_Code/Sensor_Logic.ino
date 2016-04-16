@@ -16,7 +16,7 @@ Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sens
     //this->sensor[RIGHT_PIT] = right_pit_sensor;
     //this->sensor[LEFT_PIT] = left_pit_sensor;
 
-    this->sensor[BEACON_DIRECTION] = beacon_direction;
+    //this->sensor[BEACON_DIRECTION] = beacon_direction;
 
     danger_code_updates[0] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
     danger_code_updates[1] = &Sensor_Logic::Danger_Check_For_Close_Obstacle;
@@ -24,7 +24,7 @@ Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sens
     //danger_code_updates[3] = &Sensor_Logic::Danger_Check_For_Pits;
 }
 
-Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sensor *left_sensor) {
+Sensor_Logic::Sensor_Logic (Sensor *right_sensor, Sensor *left_sensor) {
 
     this->sensor[RIGHT] = right_sensor;
     this->sensor[LEFT] = left_sensor;
@@ -33,7 +33,7 @@ Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sens
     //this->sensor[RIGHT_PIT] = right_pit_sensor;
     //this->sensor[LEFT_PIT] = left_pit_sensor;
 
-    this->sensor[BEACON_DIRECTION] = beacon_direction;
+    //this->sensor[BEACON_DIRECTION] = beacon_direction;
 
     danger_code_updates[0] = &Sensor_Logic::Danger_Check_For_Far_Obstacle;
     danger_code_updates[1] = &Sensor_Logic::Danger_Check_For_Close_Obstacle;
@@ -42,7 +42,7 @@ Sensor_Logic::Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sens
 }
 
 void Sensor_Logic::Danger_Check_For_Far_Obstacle () {
-    if (this->sensor_danger_code[RIGHT] == 1 || this->sensor_danger_code[LEFT] == 1) {
+    /*if (this->sensor_danger_code[RIGHT] == 1 || this->sensor_danger_code[LEFT] == 1) {
         this->danger_id = 2;
 
         if (this->sensor_danger_code[RIGHT] == 0)
@@ -51,7 +51,7 @@ void Sensor_Logic::Danger_Check_For_Far_Obstacle () {
             this->side_id = -1;
         else
             this->side_id = 0;
-    }
+    }*/
 }
 
 void Sensor_Logic::Danger_Check_For_Close_Obstacle () {
@@ -63,7 +63,13 @@ void Sensor_Logic::Danger_Check_For_Close_Obstacle () {
         else if (this->sensor_danger_code[LEFT] == 0)
             this->side_id = -1;
         else
-            this->side_id = 0;
+            if (this->sensor[RIGHT]->Get_Value() > this->sensor[LEFT]->Get_Value())
+                this->side_id = -1;
+            else
+                this->side_id = 1;
+
+        Serial.print ("Side id: ");
+        Serial.println (this->side_id);
     }
 }
 
@@ -151,7 +157,7 @@ int Sensor_Logic::Get_Beacon_Direction() {
     // Returns -1 if we are too left
     // return 1 if we are too right
     
-    if (this->sensor[BEACON_DIRECTION]->Get_Value() > 980) {
+    if (digitalRead(DIRECTION_SENSOR_PIN) == 0) {
       return 1;
     }
     else {

@@ -14,8 +14,8 @@
 
 #define  PIT_DANGER 300
 
-#define OBSTACLE_WARNING 200
-#define OBSTACLE_DANGER 400
+#define OBSTACLE_WARNING 300
+#define OBSTACLE_DANGER 350
 
 #define NUM_SENSORS 3
 #define NUM_DANGER_UPDATES 2
@@ -42,7 +42,7 @@ class Sensor_Logic {
         Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sensor *middle_sensor,
                       Sensor *left_sensor, Sensor *right_pit_sensor, Sensor *left_pit_sensor);
 
-         Sensor_Logic (Sensor *beacon_direction, Sensor *right_sensor, Sensor *left_sensor);
+         Sensor_Logic (Sensor *right_sensor, Sensor *left_sensor);
                       
         void Update_Sensors ();
 

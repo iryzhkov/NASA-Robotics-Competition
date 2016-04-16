@@ -43,8 +43,8 @@ void Movement_Control::Turn_Left () {
     *  starts turning left
     */
 
-    this->left_Motor->Set_PWM(140);
-    this->right_Motor->Set_PWM(140);
+    this->left_Motor->Set_PWM(200);
+    this->right_Motor->Set_PWM(200);
     
     this->left_Motor->Set_DIR(LOW);
     this->right_Motor->Set_DIR(LOW);
@@ -56,8 +56,8 @@ void Movement_Control::Turn_Right () {
     *  starts turning right
     */
 
-    this->left_Motor->Set_PWM(140);
-    this->right_Motor->Set_PWM(140);
+    this->left_Motor->Set_PWM(200);
+    this->right_Motor->Set_PWM(200);
     
     this->left_Motor->Set_DIR(HIGH);
     this->right_Motor->Set_DIR(HIGH);
@@ -86,8 +86,8 @@ void Movement_Control::Differential_Turn_Left () {
 
     this->current_direction = 1;
 
-    this->left_Motor->Set_PWM(125);
-    this->right_Motor->Set_PWM(175);
+    this->left_Motor->Set_PWM(190);
+    this->right_Motor->Set_PWM(240);
     
     this->left_Motor->Set_DIR(HIGH);
     this->right_Motor->Set_DIR(LOW);
@@ -105,8 +105,8 @@ void Movement_Control::Differential_Turn_Right () {
 
     this->current_direction = 1;
 
-    this->left_Motor->Set_PWM(175);
-    this->right_Motor->Set_PWM(125);
+    this->left_Motor->Set_PWM(240);
+    this->right_Motor->Set_PWM(190);
     
     this->left_Motor->Set_DIR(HIGH);
     this->right_Motor->Set_DIR(LOW);
@@ -124,8 +124,8 @@ void Movement_Control::Move_Forward () {
 
     this->current_direction = 1;
     
-    left_motor->Set_PWM(140);
-    right_motor->Set_PWM(140);
+    left_motor->Set_PWM(200);
+    right_motor->Set_PWM(200);
     
     right_motor->Set_DIR(LOW);
     left_motor->Set_DIR(HIGH);  
@@ -143,8 +143,8 @@ void Movement_Control::Move_Backward () {
 
     this->current_direction = -1;
 
-    left_motor->Set_PWM(140);
-    right_motor->Set_PWM(140);
+    left_motor->Set_PWM(200);
+    right_motor->Set_PWM(200);
     
     left_motor->Set_DIR(LOW);
     right_motor->Set_DIR(HIGH);

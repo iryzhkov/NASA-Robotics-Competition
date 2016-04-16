@@ -31,11 +31,11 @@ void Sensor::Update_Value() {
   */
     if (!this->testing) {
         this->sensor_value = 0;
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             this->sensor_value += analogRead(this->sensor_pin);
-            delay(5);
+            delay(2);
         }
-        this->sensor_value /= 20;
+        this->sensor_value /= 8;
     }
 }
 
@@ -50,7 +50,7 @@ void Sensor::Set_Value(int value) {
 }
 
 void Sensor::Set_Testing (bool value) {
-  /* Sensor::Update_Value():
+  /* Sensor::Update                                             _Value():
   *  
   * set the testing value.
   */

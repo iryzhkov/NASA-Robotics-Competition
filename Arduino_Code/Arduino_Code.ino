@@ -24,6 +24,8 @@
 #define TESTING false
 #define SOFTWARE false
 
+#define UNDER_CONTROL false
+
 // Global variables
 Robot_Logic       *robot;
 
@@ -38,8 +40,9 @@ Sensor            *left_pit_sensor,
                   *right_pit_sensor,
                   *left_sensor,
                   *right_sensor,
-                  *middle_sensor,
-                  *beacon_direction;
+                  *middle_sensor;
+
+int               current_command;
 
 void setup() {
     // starting serial communication.
@@ -52,6 +55,7 @@ void setup() {
     // setting up Movement_Control
     drive_control = new Movement_Control(left_motor, right_motor);
 
+
     // setting up IR sensors with the testing settings
     //left_pit_sensor = new Sensor(LEFT_PIT_SENSOR_PIN);   
     //right_pit_sensor = new Sensor(RIGHT_PIT_SENSOR_PIN); 
@@ -60,19 +64,25 @@ void setup() {
     //middle_sensor = new Sensor(MIDDLE_SENSOR_PIN);
 
     // setting up compass and beacon sensors
-    beacon_direction = new Sensor(DIRECTION_SENSOR_PIN);
+    //beacon_direction = new Sensor(DIRECTION_SENSOR_PIN);
 
     // setting up sensor logic
     //sensor_logic = new Sensor_Logic (beacon_direction, right_sensor, middle_sensor, left_sensor, right_pit_sensor, left_pit_sensor);
-    sensor_logic = new Sensor_Logic (beacon_direction, right_sensor, left_sensor);
+    sensor_logic = new Sensor_Logic (right_sensor, left_sensor);
     
     // setting up robot logic
     robot = new Robot_Logic (drive_control, sensor_logic);
+
+    pinMode(DIRECTION_SENSOR_PIN, INPUT_PULLUP);
+
+    current_command = 0;
+
+    delay(3000);
 }
 
 void loop() {
     // running unit tests if we are debbuging the program
-    if (TESTING) {
+    if (!UNDER_CONTROL && TESTING) {
         if (SOFTWARE) {
             // setting robot to testing mode
             robot->Set_Testing(true);
@@ -89,13 +99,7 @@ void loop() {
             delay(100);
             sensor_logic->Update_Sensors();
 
-            //Serial.print ("Left Sensor: ");
-            //Serial.print (left_sensor->Get_Value());
-
-            //Serial.print ("\tRight Sensor: ");
-            //Serial.println (right_sensor->Get_Value());
-
-            Serial.println (analogRead(DIRECTION_SENSOR_PIN));
+            //Serial.println (analogRead(DIRECTION_SENSOR_PIN));
             /*
             // testing right motor
             drive_control->Differential_Turn(1);
@@ -109,11 +113,12 @@ void loop() {
             */
         }
     }
-    else {
+    else if (!UNDER_CONTROL) {
         robot->main();
-        delay(50);
-
-        //Serial.println (analogRead(A0));
-        //delay (500);
+    }
+    else {
+        // Get new command from Serial (like bluetooth), and execute it
+        Get_New_Command();
+        Execute_Current_Command();
     }
 }

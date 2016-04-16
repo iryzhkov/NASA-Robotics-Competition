@@ -1,17 +1,32 @@
+/* ////////////////////////////////
+This sketch finds the heading (degrees) of the transmitting beacon relative to
+the receiver. For example, if the receiver is due west of the beacon, this sketch
+will return a heading of 90 degrees.
+This sketch receives a packet and stores the RSSI (signal strength) in the RSSIArray
+with an index of the Heading (data). It does so 'Samples' amount of times. Then the data
+is passed through a digital filter. If the RSSI was not evaluated for a specific heading,
+then that data point is not evaluated. This prevents values that were not measured from
+effecting the output of the digital filter.
+Authored By: Adam St. Amand
+Modified by Robert Belter 10/30/2015
+- Improved calculation of heading. Now uses floating point value from beacon and does circular mean averaging
+- Added support for i2c communication
+//////////////////////////////////*/
+
+
+
+
+
 #include <XBee.h>
 #include <SoftwareSerial.h>
 #include <Wire.h>
 
-SoftwareSerial outputSerial(10, 9); // RX, TX
-
 XBee xbee = XBee();
 Rx16Response rx16 = Rx16Response();
 int resetRSSI = -1000;    //The value that RSSI is reset to after each pass through filter
-
 #define samples 110
-
 int temp, smoothData, rawData;
-int timeToScan = 4000;
+int timeToScan = 2000;
 short currentHeading;
 
 //Variable for i2c comms
@@ -29,16 +44,13 @@ union{
   uint8_t b[4];
 } heading_converter;
 
-void Set_Up_Beacon () {
+void Set_Up_Beacon() {
   //Initialize serial communications at 57600 bps:
-  //Serial1.begin(57600); 
-  //xbee.setSerial(Serial1);
-
-  //Initialize i2c communications
-  Wire.begin(8);                // join i2c bus with address #8
+  Serial1.begin(57600);
+  xbee.setSerial(Serial1);
 }
 
-void Update_Beacon_Direction () {
+void Update_Beacon_Direction() {
   //Retrieve necessary numbers of samples
   //TODO: Improve delay system
   int start = millis();
@@ -53,10 +65,10 @@ void Update_Beacon_Direction () {
   currHeadingI2c[0] = 0xFF&(currentHeading>>8);
   currHeadingI2c[1] = 0xFF&currentHeading;
 
-  // Stop interrupts, and update beacon_heading
-  cli();
   beacon_heading = currentHeading;
-  sei();
+
+  if (beacon_heading > 360)
+    beacon_heading -= 360;
 }
 
 

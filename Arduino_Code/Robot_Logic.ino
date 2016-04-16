@@ -50,13 +50,15 @@ void Robot_Logic::main () {
         this->subprocess_id = 0;
     }
 
-    Serial.print (this->danger_id);
+    
+    /*Serial.print (this->danger_id);
     Serial.print (" ");
     Serial.print (this->process_id);
     Serial.print (" ");
     Serial.print (this->subprocess_id);
     Serial.print (" ");
-    Serial.println (this->process_time);
+    Serial.print (this->process_time);
+    Serial.print (" ");*/
     
     // Don't freak out about the next line of code.
     // It calls a function from the array
@@ -77,6 +79,10 @@ void Robot_Logic::Go_Towards_Beacon () {
     // Isn't it just beautiful?
     
     this->subprocess_id = this->sensors->Get_Beacon_Direction();
+
+    Serial.print("Beacon Direction: ");
+    Serial.println(this->subprocess_id);
+    
     this->control->Differential_Turn(this->subprocess_id);
 }
 
@@ -153,11 +159,14 @@ void Robot_Logic::Avoid_Obstacle_In_Front () {
     case 1: {     
         // and set controls to do the turn towards the side without obstacles
         this->control->Move_Backward();
-        delay(500);
+        delay(600);
 
         // nothing could happen when turing in place
-        this->control->Turn(this->side_id);
-        delay(400);
+        while (this->sensors->Get_Danger_ID() == 3) {
+          this->control->Turn(this->side_id);
+          this->sensors->Update_Sensors();
+          delay(100);
+        }
 
         this->process_time = 10;
         this->process_id = 1;
