@@ -43,8 +43,8 @@ void Movement_Control::Turn_Left () {
     *  starts turning left
     */
 
-    this->left_Motor->Set_PWM(200);
-    this->right_Motor->Set_PWM(200);
+    this->left_Motor->Set_PWM(230);
+    this->right_Motor->Set_PWM(230);
     
     this->left_Motor->Set_DIR(LOW);
     this->right_Motor->Set_DIR(LOW);
@@ -56,8 +56,8 @@ void Movement_Control::Turn_Right () {
     *  starts turning right
     */
 
-    this->left_Motor->Set_PWM(200);
-    this->right_Motor->Set_PWM(200);
+    this->left_Motor->Set_PWM(230);
+    this->right_Motor->Set_PWM(230);
     
     this->left_Motor->Set_DIR(HIGH);
     this->right_Motor->Set_DIR(HIGH);

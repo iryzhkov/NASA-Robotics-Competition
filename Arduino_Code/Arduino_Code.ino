@@ -17,14 +17,14 @@
 // library link: https://github.com/mmurdoch/arduinounit
 #include <ArduinoUnit.h>
 
-// Testing settings
+// Testing setti ngs
 // Set testing true if you want to test software or hardware
 // Set Software true if you want to test software
 // Set Software false if you want to test hardware
 #define TESTING false
 #define SOFTWARE false
 
-#define UNDER_CONTROL false
+#define UNDER_CONTROL true
 
 // Global variables
 Robot_Logic       *robot;
@@ -117,8 +117,9 @@ void loop() {
         robot->main();
     }
     else {
-        // Get new command from Serial (like bluetooth), and execute it
+        // Get new command from Serial (maybe from bluetooth), and execute it
         Get_New_Command();
         Execute_Current_Command();
+        delay(20);
     }
 }
